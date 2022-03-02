@@ -41,7 +41,7 @@ include("includes/main.php");
 
     </div><!-- col-md-3 Ends -->
 
-    <div class="col-md-9">
+    <div id="products" class="col-md-9">
       <!-- col-md-9 Starts --->
 
 
@@ -60,6 +60,8 @@ include("includes/main.php");
       </ul><!-- pagination Ends -->
 
     </center><!-- center Ends -->
+
+
 
   </div><!-- col-md-9 Ends --->
 
@@ -108,6 +110,12 @@ include("includes/footer.php");
 
     /// Hide And Show Code Ends ///
 
+    /// Search Filters code Starts ///
+
+
+
+    /// Search Filters code Ends ///
+
   });
 </script>
 
@@ -118,28 +126,50 @@ include("includes/footer.php");
     // getProducts Function Code Starts
 
     function getProducts() {
+      const input_search_value = $('#input_search').val();
+      const input_price_value = [...$('.input_price')].filter(item => {
+        return item.checked;
+      })[0]?.value ?? '';
 
-      $.ajax({
+      if(input_search_value !== '' || input_price_value !== '') {
+        $.ajax({
+  
+          url: "load.php",
+  
+          method: "POST",
+  
+          data: {
+            input_search_value,
+            input_price_value
+          },
+  
+          success: function(data) {
+  
+            $('#products').html('');
+  
+            $('#products').html(data);
+  
+            $("#wait").empty();
+  
+          }
+  
+        });
+      } else {
+        window.open('shop.php');
+      }
 
-        url: "load.php",
-
-        method: "POST",
-
-        data: {
-          
-        },
-
-        success: function(data) {
-
-          $('#Products').html('');
-
-          $('#Products').html(data);
-
-        }
-
-      });
+      // ajax Code Ends
 
     }
+
+    // getProducts Function Code Ends
+
+    $('.button_control_panel').click(function(event) {
+
+      getProducts();
+      event.preventDefault();
+
+    });
 
   });
 </script>
