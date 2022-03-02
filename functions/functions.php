@@ -73,95 +73,126 @@ function total_price()
 function getPro()
 {
 
+    $noi_dung_tim_kiem = '';
+    $gia_tim_kiem = '1';
+    $input_search_value = '';
+    if (isset($_POST['input_search_value'])) {
+        $input_search_value = $_POST['input_search_value'];
+        if ($_POST['input_search_value'] != '') {
+            $noi_dung_tim_kiem = "and product_title LIKE '%" . $input_search_value . "%'";
+        }
+        if ($_POST['input_price_value'] == '50') {
+            $gia_tim_kiem = "product_price < 50";
+        } else if ($_POST['input_price_value'] == '100') {
+            $gia_tim_kiem = " (product_price > 50 and product_price <= 100)";
+        } else if ($_POST['input_price_value'] == '200') {
+            $gia_tim_kiem = " (product_price > 100 and product_price <= 200)";
+        } else if($_POST['input_price_value'] == '201') {
+            $gia_tim_kiem = "product_price > 200";
+        }
+    }
+
     global $db;
 
     $get_products = "select * from products order by 1 DESC LIMIT 0,8";
 
+    if (!empty($noi_dung_tim_kiem) || !empty($gia_tim_kiem)) {
+        $get_products = "select * from products where $gia_tim_kiem $noi_dung_tim_kiem";
+    }
+
     $run_products = mysqli_query($db, $get_products);
-    
-    while ($row_products = mysqli_fetch_array($run_products)) {
 
-        $pro_id = $row_products['product_id'];
+    if (mysqli_num_rows($run_products) > 0) {
 
-        $pro_title = $row_products['product_title'];
+        while ($row_products = mysqli_fetch_array($run_products)) {
 
-        $pro_price = $row_products['product_price'];
+            $pro_id = $row_products['product_id'];
 
-        $pro_img1 = $row_products['product_img1'];
+            $pro_title = $row_products['product_title'];
 
-        $pro_label = $row_products['product_label'];
+            $pro_price = $row_products['product_price'];
 
-        $pro_psp_price = $row_products['product_psp_price'];
+            $pro_img1 = $row_products['product_img1'];
 
-        $pro_url = $row_products['product_url'];
+            $pro_label = $row_products['product_label'];
 
-        if ($pro_label == "Sale" or $pro_label == "Gift") {
+            $pro_psp_price = $row_products['product_psp_price'];
 
-            $product_price = "<del> $$pro_price </del>";
+            $pro_url = $row_products['product_url'];
 
-            $product_psp_price = "| $$pro_psp_price";
-        } else {
+            if ($pro_label == "Sale" or $pro_label == "Gift") {
 
-            $product_psp_price = "";
+                $product_price = "<del> $$pro_price </del>";
 
-            $product_price = "$$pro_price";
+                $product_psp_price = "| $$pro_psp_price";
+            } else {
+
+                $product_psp_price = "";
+
+                $product_price = "$$pro_price";
+            }
+
+            if ($pro_label == "") {
+            } else {
+
+                $product_label = "
+
+                    <a class='label sale' href='#' style='color:black;'>
+                    
+                    <div class='thelabel'>$pro_label</div>
+                    
+                    <div class='label-background'> </div>
+                    
+                    </a>
+                    
+                    ";
+                }
+                
+                echo "
+                
+                <div class='col-md-4 col-sm-6 center-responsive' >
+                
+                <div class='product' >
+                
+                <a href='$pro_url' >
+                
+                <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
+                
+                </a>
+                
+                <div class='text' >
+                
+                
+                <hr>
+                
+                <h3><a href='$pro_url' >$pro_title</a></h3>
+                
+                <p class='price' > $product_price $product_psp_price </p>
+                
+                <p class='buttons' >
+                
+                <a href='$pro_url' class='btn btn-default' >View details</a>
+                
+                <a href='$pro_url' class='btn btn-danger'>
+                
+                <i class='fa fa-shopping-cart' data-price=$pro_price></i> Add To Cart
+                
+                </a>
+                
+                
+                </p>
+                
+                </div>
+                
+                $product_label
+                
+                
+                </div>
+                
+                </div>
+                
+                ";
         }
-
-        if ($pro_label == "") {
-        } else {
-
-            $product_label = "
-
-        <a class='label sale' href='#' style='color:black;'>
-
-        <div class='thelabel'>$pro_label</div>
-
-        <div class='label-background'> </div>
-
-        </a>
-
-        ";
-        }
-
-        echo "
-
-          <div class='col-md-4 col-sm-6 single' >
-
-          <div class='product' >
-
-          <a href='$pro_url' >
-
-          <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
-
-          </a>
-
-          <div class='text' >
-
-          <hr>
-
-          <h3><a href='$pro_url' >$pro_title</a></h3>
-
-          <p class='price' > $product_price $product_psp_price </p>
-
-          <p class='buttons' >
-
-          <a href='$pro_url' class='btn btn-default' >View Details</a>
-
-          <a href='$pro_url' class='btn btn-danger'>
-
-          <i class='fa fa-shopping-cart'></i> Add To Cart
-
-          </a>
-
-
-          </p>
-
-          </div>
-        $product_label</div>
-
-        </div>
-
-        ";
     }
 }
 
@@ -177,6 +208,7 @@ function getProducts()
     global $db;
 
     $aWhere = array();
+
 
     /// Products Categories Code Starts ///
 
@@ -205,8 +237,6 @@ function getProducts()
             }
         }
     }
-
-
 
     /// Categories Code Ends ///
 
@@ -263,61 +293,61 @@ function getProducts()
 
             $product_label = "
 
-        <a class='label sale' href='#' style='color:black;'>
+<a class='label sale' href='#' style='color:black;'>
 
-        <div class='thelabel'>$pro_label</div>
+<div class='thelabel'>$pro_label</div>
 
-        <div class='label-background'> </div>
+<div class='label-background'> </div>
 
-        </a>
+</a>
 
-        ";
-                }
+";
+        }
 
-                echo "
+        echo "
 
-        <div class='col-md-4 col-sm-6 center-responsive' >
+<div class='col-md-4 col-sm-6 center-responsive' >
 
-        <div class='product' >
+<div class='product' >
 
-        <a href='$pro_url' >
+<a href='$pro_url' >
 
-        <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
+<img src='admin_area/product_images/$pro_img1' class='img-responsive' >
 
-        </a>
+</a>
 
-        <div class='text' >
-
-
-        <hr>
-
-        <h3><a href='$pro_url' >$pro_title</a></h3>
-
-        <p class='price' > $product_price $product_psp_price </p>
-
-        <p class='buttons' >
-
-        <a href='$pro_url' class='btn btn-default' >View details</a>
-
-        <a href='$pro_url' class='btn btn-danger'>
-
-        <i class='fa fa-shopping-cart' data-price=$pro_price></i> Add To Cart
-
-        </a>
+<div class='text' >
 
 
-        </p>
+<hr>
 
-        </div>
+<h3><a href='$pro_url' >$pro_title</a></h3>
 
-        $product_label
+<p class='price' > $product_price $product_psp_price </p>
+
+<p class='buttons' >
+
+<a href='$pro_url' class='btn btn-default' >View details</a>
+
+<a href='$pro_url' class='btn btn-danger'>
+
+<i class='fa fa-shopping-cart' data-price=$pro_price></i> Add To Cart
+
+</a>
 
 
-        </div>
+</p>
 
-        </div>
+</div>
 
-        ";
+$product_label
+
+
+</div>
+
+</div>
+
+";
     }
     /// getProducts function Code Ends ///
 
