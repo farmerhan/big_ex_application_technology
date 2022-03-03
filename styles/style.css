@@ -288,6 +288,16 @@ body {
   margin: 0;
 }
 
+.form-signin {
+  width: 25%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.btn-register {
+  margin-top: 15px;
+}
+
 /* Shop Products Styles */
 
 @media (max-width: 768px) {
