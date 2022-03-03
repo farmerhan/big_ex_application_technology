@@ -273,21 +273,6 @@
 <!--- panel panel-default sidebar-menu Starts -->
 <div class="panel panel-default sidebar-menu">
     <!--- panel panel-default sidebar-menu Starts -->
-    <div class="panel-heading">
-        <!-- panel-heading Starts -->
-        <h3 class="panel-title">
-            <!-- panel-title Starts -->
-            Lựa chọn để tìm kiếm
-            <div class="pull-right">
-                <!-- pull-right Starts -->
-                <a href="#" style="color:black;">
-                    <span class="nav-toggle hide-show">
-                        Ẩn bớt
-                    </span>
-                </a>
-            </div><!-- pull-right Ends -->
-        </h3><!-- panel-title Ends -->
-    </div><!-- panel-heading Ends -->
     <div class="panel-collapse collapse-data">
         <!-- panel-collapse collapse-data Starts -->
         <div class="panel-body">
