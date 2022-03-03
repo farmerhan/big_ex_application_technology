@@ -35,7 +35,7 @@ include("includes/main.php");
     ?>
 
     </div><!-- row Ends -->
-
+      <center><a href="#"><button class="btn btn-outline-info"> Quay về đầu trang</button></a></center>
     </div><!-- container Ends -->
     <!-- FOOTER -->
     <footer class="page-footer">
