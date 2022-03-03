@@ -79,7 +79,7 @@ if (isset($_POST['login'])) {
 
     if ($check_customer == 0) {
 
-        echo "<script>alert('password or email is wrong')</script>";
+        echo "<script>alert('Bạn nhập sai email hoặc mật khẩu')</script>";
 
         exit();
     }
@@ -88,14 +88,14 @@ if (isset($_POST['login'])) {
 
         $_SESSION['customer_email'] = $customer_email;
 
-        echo "<script>alert('You are Logged In')</script>";
+        echo "<script>alert('Bạn đã đăng nhập thành công')</script>";
 
         echo "<script>window.open('customer/my_account.php?my_orders','_self')</script>";
     } else {
 
         $_SESSION['customer_email'] = $customer_email;
 
-        echo "<script>alert('You are Logged In')</script>";
+        echo "<script>alert('Bạn đã đăng nhập thành công')</script>";
 
         echo "<script>window.open('checkout.php','_self')</script>";
     }
