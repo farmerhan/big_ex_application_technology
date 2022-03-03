@@ -79,7 +79,7 @@
             </li>
 
             <li class="categories__item">
-              <a class="categories__link" href="localstore.php">
+              <a class="categories__link" href="#">
                 Local Stores
               </a>
             </li>

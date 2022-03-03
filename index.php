@@ -113,8 +113,7 @@ include("includes/main.php");
           <div class="footer-nav__col footer-nav__col--contacts">
             <div class="footer-nav__heading">Contact details</div>
             <address class="address">
-            Head Office: Avenue Fashion.<br>
-            180-182 Regent Street, London.
+            Head Office:  175 Tây Sơn Đống Đa Hà Nội Việt Nam
           </address>
             <div class="phone">
               Telephone:
@@ -158,15 +157,15 @@ include("includes/main.php");
         <div class="container clearfix">
 
           <div class="copyright">
-            &copy; <?php echo date("Y");?> Ecommerce Website-PHP&trade;
+          &copy; Nhóm 2 công nghệ phần mềm WRU 61TH4 &trade;
           </div>
 
           <div class="developer">
-            Developed by Yasser Dalouzi
+            Dev by Nhóm 2
           </div>
 
           <div class="designby">
-            Design by Yasser Dalouzi
+            Design by Nhóm 2
           </div>
 
         </div>

@@ -57,7 +57,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
 
 <a href="customer_register.php" >
 
-<h3>New ? Register Here</h3>
+<a href="./customer_register.php" style="display: block; margin-top: 10px; text-decoration: underline;">Đăng kí tài khoản</a>
 
 </a>
 

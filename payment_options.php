@@ -15,11 +15,11 @@
 
   ?>
 
-  <h1 class="text-center">Payment Options For You</h1>
+  <h1 class="text-center">Chọn phương thức thanh toán</h1>
 
   <p class="lead text-center">
 
-    <a href="order.php?c_id=<?php echo $customer_id; ?>">Pay Off line</a>
+    <a style="text-decoration: underline;" href="order.php?c_id=<?php echo $customer_id; ?>">Thanh toán trực tiếp</a>
 
   </p>
 

@@ -190,8 +190,8 @@ include("includes/main.php");
 
               <a href="index.php" class="btn btn-default">
 
-                <i class="fa fa-chevron-left"></i> Continue Shopping
-
+                <i class="fa fa-chevron-left inline-block me-4"></i>
+                <span class="inline-block ms-4"> Continue Shopping</span>
               </a>
 
             </div><!-- pull-left Ends -->

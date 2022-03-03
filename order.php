@@ -1,9 +1,8 @@
 <?php
 
-
-include("includes/db.php");
-include("includes/header.php");
-include("functions/functions.php");
+include "includes/db.php";
+include "includes/header.php";
+include "functions/functions.php";
 
 ?>
 
@@ -32,9 +31,7 @@ while ($row_cart = mysqli_fetch_array($run_cart)) {
 
     $pro_qty = $row_cart['qty'];
 
-
     $sub_total = $row_cart['p_price'] * $pro_qty;
-
 
     $insert_customer_order = "insert into customer_orders (customer_id,due_amount,invoice_no,qty,size,order_date,order_status) values ('$customer_id','$sub_total','$invoice_no','$pro_qty','$pro_size',NOW(),'$status')";
 
