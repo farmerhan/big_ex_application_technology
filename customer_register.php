@@ -2,200 +2,150 @@
 
 session_start();
 
-include "includes/db.php";
-include "includes/header.php";
-include "functions/functions.php";
-include "includes/main.php";
+include("includes/db.php");
+include("includes/header.php");
+include("functions/functions.php");
+include("includes/main.php");
+
 
 ?>
 
 
-  <!-- MAIN -->
-  <main>
-    <!-- HERO -->
-    <div class="nero">
-      <div class="nero__heading">
-        <span class="nero__bold">Register</span> AT AVE
-      </div>
-      <p class="nero__text">
-      </p>
+<!-- MAIN -->
+<main>
+  <!-- HERO -->
+  <div class="nero">
+    <div class="nero__heading">
+      <span class="nero__bold">Đăng kí</span>
     </div>
-  </main>
+    <p class="nero__text">
+    </p>
+  </div>
+</main>
 
 
-<div id="content" ><!-- content Starts -->
-<div class="container" ><!-- container Starts -->
+<div id="content">
+  <!-- content Starts -->
+  <div class="container">
+    <!-- container Starts -->
 
 
 
 
 
-<div class="col-md-12" ><!-- col-md-12 Starts -->
+    <div class="col-md-12">
+      <!-- col-md-12 Starts -->
 
-<div class="box" ><!-- box Starts -->
+      <div class="box">
+        <!-- box Starts -->
 
-<div class="box-header" ><!-- box-header Starts -->
+        <div class="box-header">
+          <!-- box-header Starts -->
 
-<center><!-- center Starts -->
+          <center>
+            <!-- center Starts -->
 
-<h2> Register A New Account </h2>
+            <h2> Đăng kí tài khoản mới </h2>
 
 
 
-</center><!-- center Ends -->
+          </center><!-- center Ends -->
 
-</div><!-- box-header Ends -->
+        </div><!-- box-header Ends -->
+        <div class="container-fluid">
+          <form action="customer_register.php" method="post" enctype="multipart/form-data">
+            <div class="form-row align-items-center">
+              <div class="col-sm-6 my-1">
+                <label>Họ và tên: </label>
+                <input type="text" class="form-control" name="c_name" required>
 
-<form action="customer_register.php" method="post" enctype="multipart/form-data" ><!-- form Starts -->
+                <label>Email: </label>
+                <input type="text" class="form-control" name="c_email" required>
 
-<div class="form-group" ><!-- form-group Starts -->
+                <label>Mật khẩu: </label>
+                <div class="input-group">
+                  <!-- input-group Starts -->
 
-<label>Customer Name</label>
+                  <span class="input-group-addon">
+                    <!-- input-group-addon Starts -->
 
-<input type="text" class="form-control" name="c_name" required>
+                    <i class="fa fa-check tick1"> </i>
 
-</div><!-- form-group Ends -->
+                    <i class="fa fa-times cross1"> </i>
 
-<div class="form-group"><!-- form-group Starts -->
+                  </span><!-- input-group-addon Ends -->
 
-<label> Customer Email</label>
+                  <input type="password" class="form-control" id="pass" name="c_pass" required>
+                </div><!-- input-group Ends -->
+                <div id="mess">
 
-<input type="text" class="form-control" name="c_email" required>
+                </div>
 
-</div><!-- form-group Ends -->
+                <label>Xác nhận lại mật khẩu: </label>
+                <div class="input-group">
+                  <!-- input-group Starts -->
 
-<div class="form-group"><!-- form-group Starts -->
+                  <span class="input-group-addon">
+                    <!-- input-group-addon Starts -->
 
-<label> Customer Password </label>
+                    <i class="fa fa-check tick2"> </i>
 
-<div class="input-group"><!-- input-group Starts -->
+                    <i class="fa fa-times cross2"> </i>
 
-<span class="input-group-addon"><!-- input-group-addon Starts -->
+                  </span><!-- input-group-addon Ends -->
 
-<i class="fa fa-check tick1"> </i>
+                  <input type="password" class="form-control confirm" id="con_pass" required>
 
-<i class="fa fa-times cross1"> </i>
+                </div><!-- input-group Ends -->
 
-</span><!-- input-group-addon Ends -->
+                <label>Ảnh đại diện: </label>
+                <input type="file" class="form-control" name="c_image" required>
+              </div>
+              <div class="col-sm-6 my-1">
+                <label>Quốc gia:</label>
+                <input type="text" class="form-control" name="c_country" required>
 
-<input type="password" class="form-control" id="pass" name="c_pass" required>
+                <label>Thành phố: </label>
+                <input type="text" class="form-control" name="c_city" required>
 
-<div id="meter_wrapper"><!-- meter_wrapper Starts -->
+                <label>Số điện thoại: </label>
+                <input type="text" class="form-control" name="c_contact" required>
 
-<span id="pass_type"> </span>
+                <label>Địa chỉ: </label>
+                <input type="text" class="form-control" name="c_address" required>
+              </div>
 
-<div id="meter"> </div>
+              <div class="col-sm-12">
+                <div class="text-center">
+                  <!-- text-center Starts -->
 
-</div><!-- meter_wrapper Ends -->
+                  <button type="submit" name="register" class="btn btn-primary btn-register">
 
-</span><!-- input-group-addon Ends -->
+                    <i class="fa fa-user-md"></i> Đăng kí
 
-</div><!-- input-group Ends -->
+                  </button>
 
-</div><!-- form-group Ends -->
+                </div><!-- text-center Ends -->
+              </div>
+            </div>
+          </form>
+        </div>
 
 
-<div class="form-group"><!-- form-group Starts -->
+      </div><!-- box Ends -->
 
-<label> Confirm Password </label>
+    </div><!-- col-md-12 Ends -->
 
-<div class="input-group"><!-- input-group Starts -->
 
-<span class="input-group-addon"><!-- input-group-addon Starts -->
 
-<i class="fa fa-check tick2"> </i>
-
-<i class="fa fa-times cross2"> </i>
-
-</span><!-- input-group-addon Ends -->
-
-<input type="password" class="form-control confirm" id="con_pass" required>
-
-</div><!-- input-group Ends -->
-
-</div><!-- form-group Ends -->
-
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label> Customer Country </label>
-
-<input type="text" class="form-control" name="c_country" required>
-
-</div><!-- form-group Ends -->
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label> Customer City </label>
-
-<input type="text" class="form-control" name="c_city" required>
-
-</div><!-- form-group Ends -->
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label> Customer Contact </label>
-
-<input type="text" class="form-control" name="c_contact" required>
-
-</div><!-- form-group Ends -->
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label> Customer Address </label>
-
-<input type="text" class="form-control" name="c_address" required>
-
-</div><!-- form-group Ends -->
-
-<div class="form-group"><!-- form-group Starts -->
-
-<label> Customer Image </label>
-
-<input type="file" class="form-control" name="c_image" required>
-
-</div><!-- form-group Ends -->
-
-
-<div class="form-group"><!-- form-group Starts -->
-
-<center>
-
-<!-- <label> Captcha Verification </label> -->
-
-<!-- <div class="g-recaptcha" data-sitekey="6LcHnoQaAAAAAF_WTAEPkd_XO_9XC80G6N1MjrH2"></div> -->
-
-</center>
-
-</div><!-- form-group Ends -->
-
-
-<div class="text-center"><!-- text-center Starts -->
-
-<button type="submit" name="register" class="btn btn-primary">
-
-<i class="fa fa-user-md"></i> Register
-
-</button>
-
-</div><!-- text-center Ends -->
-
-</form><!-- form Ends -->
-
-</div><!-- box Ends -->
-
-</div><!-- col-md-12 Ends -->
-
-
-
-</div><!-- container Ends -->
+  </div><!-- container Ends -->
 </div><!-- content Ends -->
 
 
 
 <?php
 
-include "includes/footer.php";
+include("includes/footer.php");
 
 ?>
 
@@ -204,47 +154,98 @@ include "includes/footer.php";
 <script src="js/bootstrap.min.js"></script>
 
 <script>
+  $(document).ready(function() {
 
-$(document).ready(function(){
+    $('.tick1').hide();
+    $('.cross1').hide();
 
-$('.tick1').hide();
-$('.cross1').hide();
-
-$('.tick2').hide();
-$('.cross2').hide();
-
-$('.confirm').focusout(function(){
-
-var password = $('#pass').val();
-
-var confirmPassword = $('#con_pass').val();
-
-if(password == confirmPassword){
-
-$('.tick1').show();
-$('.cross1').hide();
-
-$('.tick2').show();
-$('.cross2').hide();
-
-}
-else{
-
-$('.tick1').hide();
-$('.cross1').show();
-
-$('.tick2').hide();
-$('.cross2').show();
+    $('.tick2').hide();
+    $('.cross2').hide();
 
 
-}
+    $('.confirm').focusout(function() {
+
+      var password = $('#pass').val();
+
+      var confirmPassword = $('#con_pass').val();
+
+      if (password == confirmPassword) {
+
+        $('.tick1').show();
+        $('.cross1').hide();
+
+        $('.tick2').show();
+        $('.cross2').hide();
 
 
-});
+
+      } else {
+
+        $('.tick1').hide();
+        $('.cross1').show();
+
+        $('.tick2').hide();
+        $('.cross2').show();
 
 
-});
+      }
 
+
+    });
+
+
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#pass').blur(() => {
+      document.getElementById("mess").innerHTML = "";
+    })
+    $("#pass").on("input", function() {
+
+      check_pass();
+
+    });
+
+  });
+
+  function check_pass() {
+    var val = document.getElementById("pass").value;
+    var meter = document.getElementById("meter");
+    var no = 0;
+    if (val != "") {
+      // If the password length is less than or equal to 6
+      if (val.length <= 6) no = 1;
+
+      // If the password length is greater than 6 and contain any lowercase alphabet or any number or any special character
+      if (val.length > 6 && (val.match(/[a-z]/) || val.match(/\d+/) || val.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/))) no = 2;
+
+      // If the password length is greater than 6 and contain alphabet,number,special character respectively
+      if (val.length > 6 && ((val.match(/[a-z]/) && val.match(/\d+/)) || (val.match(/\d+/) && val.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)) || (val.match(/[a-z]/) && val.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)))) no = 3;
+
+      // If the password length is greater than 6 and must contain alphabets,numbers and special characters
+      if (val.length > 6 && val.match(/[a-z]/) && val.match(/\d+/) && val.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/)) no = 4;
+
+      if (no == 1) {
+        document.getElementById("mess").innerHTML = "<p class='text-danger'>Mật khẩu nên có hơn 6 kí tự</p>";
+      }
+
+      if (no == 2) {
+        document.getElementById("mess").innerHTML = "<p class='text-secondary'>Mật khẩu nên thêm số hoặc kí tự </p>";
+      }
+
+      if (no == 3) {
+        document.getElementById("mess").innerHTML = "";
+      }
+
+      if (no == 4) {
+        document.getElementById("mess").innerHTML = "";
+      }
+    } else {
+      document.getElementById("mess").innerHTML = "";
+    }
+  }
 </script>
 
 </body>
@@ -255,61 +256,60 @@ $('.cross2').show();
 
 if (isset($_POST['register'])) {
 
-// $secret = "6LcHnoQaAAAAAF3_pqQ55sZMDgaWCGcXq4ucLgkH";
+  // $secret = "6LcHnoQaAAAAAF3_pqQ55sZMDgaWCGcXq4ucLgkH";
 
-// $response = $_POST['g-recaptcha-response'];
+  // $response = $_POST['g-recaptcha-response'];
 
-    $remoteip = $_SERVER['REMOTE_ADDR'];
+  $remoteip = $_SERVER['REMOTE_ADDR'];
 
-// $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response&remoteip=$remoteip");
+  // $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response&remoteip=$remoteip");
 
-// $result = json_decode($url, TRUE);
+  // $result = json_decode($url, TRUE);
 
-    if ($result['success'] == 0) {
+  if ($result['success'] == 0) {
 
-        $c_name = $_POST['c_name'];
+    $c_name = $_POST['c_name'];
 
-        $c_email = $_POST['c_email'];
+    $c_email = $_POST['c_email'];
 
-        $c_pass = $_POST['c_pass'];
+    $c_pass = $_POST['c_pass'];
 
-        $c_country = $_POST['c_country'];
+    $c_country = $_POST['c_country'];
 
-        $c_city = $_POST['c_city'];
+    $c_city = $_POST['c_city'];
 
-        $c_contact = $_POST['c_contact'];
+    $c_contact = $_POST['c_contact'];
 
-        $c_address = $_POST['c_address'];
+    $c_address = $_POST['c_address'];
 
-        $c_image = $_FILES['c_image']['name'];
+    $c_image = $_FILES['c_image']['name'];
 
-        $c_image_tmp = $_FILES['c_image']['tmp_name'];
+    $c_image_tmp = $_FILES['c_image']['tmp_name'];
 
-        $c_ip = getRealUserIp();
+    $c_ip = getRealUserIp();
 
-        move_uploaded_file($c_image_tmp, "customer/customer_images/$c_image");
+    move_uploaded_file($c_image_tmp, "customer/customer_images/$c_image");
 
-        $get_email = "select * from customers where customer_email='$c_email'";
+    $get_email = "select * from customers where customer_email='$c_email'";
 
-        $run_email = mysqli_query($con, $get_email);
+    $run_email = mysqli_query($con, $get_email);
 
-        $check_email = mysqli_num_rows($run_email);
+    $check_email = mysqli_num_rows($run_email);
 
-        if ($check_email == 1) {
+    if ($check_email == 1) {
 
-            echo "<script>alert('This email is already registered, try another one')</script>";
+      echo "<script>alert('This email is already registered, try another one')</script>";
 
-            exit();
+      exit();
+    }
 
-        }
+    $customer_confirm_code = mt_rand();
 
-        $customer_confirm_code = mt_rand();
+    $subject = "Email Confirmation Message";
 
-        $subject = "Email Confirmation Message";
+    $from = "sad.ahmed22224@gmail.com";
 
-        $from = "sad.ahmed22224@gmail.com";
-
-        $message = "
+    $message = "
 
 <h2>
 Email Confirmation By Computerfever.com $c_name
@@ -323,46 +323,42 @@ Click Here To Confirm Email
 
 ";
 
-        $headers = "From: $from \r\n";
+    $headers = "From: $from \r\n";
 
-        $headers .= "Content-type: text/html\r\n";
+    $headers .= "Content-type: text/html\r\n";
 
-        mail($c_email, $subject, $message, $headers);
+    mail($c_email, $subject, $message, $headers);
 
-        $insert_customer = "insert into customers (customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address,customer_image,customer_ip,customer_confirm_code) values ('$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address','$c_image','$c_ip','$customer_confirm_code')";
+    $insert_customer = "insert into customers (customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address,customer_image,customer_ip,customer_confirm_code) values ('$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address','$c_image','$c_ip','$customer_confirm_code')";
 
-        $run_customer = mysqli_query($con, $insert_customer);
 
-        $sel_cart = "select * from cart where ip_add='$c_ip'";
+    $run_customer = mysqli_query($con, $insert_customer);
 
-        $run_cart = mysqli_query($con, $sel_cart);
+    $sel_cart = "select * from cart where ip_add='$c_ip'";
 
-        $check_cart = mysqli_num_rows($run_cart);
+    $run_cart = mysqli_query($con, $sel_cart);
 
-        if ($check_cart > 0) {
+    $check_cart = mysqli_num_rows($run_cart);
 
-            $_SESSION['customer_email'] = $c_email;
+    if ($check_cart > 0) {
 
-            echo "<script>alert('You have been Registered Successfully')</script>";
+      $_SESSION['customer_email'] = $c_email;
 
-            echo "<script>window.open('checkout.php','_self')</script>";
+      echo "<script>alert('You have been Registered Successfully')</script>";
 
-        } else {
-
-            $_SESSION['customer_email'] = $c_email;
-
-            echo "<script>alert('You have been Registered Successfully')</script>";
-
-            echo "<script>window.open('index.php','_self')</script>";
-
-        }
-
+      echo "<script>window.open('checkout.php','_self')</script>";
     } else {
 
-        echo "<script>alert('Please Select Captcha, Try Again')</script>";
+      $_SESSION['customer_email'] = $c_email;
 
+      echo "<script>alert('You have been Registered Successfully')</script>";
+
+      echo "<script>window.open('index.php','_self')</script>";
     }
+  } else {
 
+    echo "<script>alert('Please Select Captcha, Try Again')</script>";
+  }
 }
 
 ?>
