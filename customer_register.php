@@ -298,7 +298,7 @@ if (isset($_POST['register'])) {
 
     if ($check_email == 1) {
 
-      echo "<script>alert('This email is already registered, try another one')</script>";
+      echo "<script>alert('Email này đã có người sử dụng, hãy dùng email khác.')</script>";
 
       exit();
     }
@@ -344,14 +344,14 @@ Click Here To Confirm Email
 
       $_SESSION['customer_email'] = $c_email;
 
-      echo "<script>alert('You have been Registered Successfully')</script>";
+      echo "<script>alert('Bạn đã đăng kí thành công')</script>";
 
       echo "<script>window.open('checkout.php','_self')</script>";
     } else {
 
       $_SESSION['customer_email'] = $c_email;
 
-      echo "<script>alert('You have been Registered Successfully')</script>";
+      echo "<script>alert('Bạn đã đăng kí thành công')</script>";
 
       echo "<script>window.open('index.php','_self')</script>";
     }
