@@ -23,7 +23,7 @@ include("includes/main.php");
 
 <div id="content">
   <!-- content Starts -->
-  <div class="container">
+  <div class="container" style="padding-top: 20px">
     <!-- container Starts -->
 
     <div class="col-md-12">
