@@ -150,32 +150,6 @@ if (isset($_REQUEST['cat']) && is_array($_REQUEST['cat'])) {
 
 <div class="panel panel-default sidebar-menu">
     <!--- panel panel-default sidebar-menu Starts -->
-
-    <div class="panel-heading">
-        <!-- panel-heading Starts -->
-
-        <h3 class="panel-title">
-            <!-- panel-title Starts -->
-
-            Lựa chọn để tìm kiếm
-
-            <div class="pull-right">
-                <!-- pull-right Starts -->
-
-                <a href="#" style="color:black;">
-
-                    <span class="nav-toggle hide-show">
-                        Ẩn bớt
-                    </span>
-
-                </a>
-
-            </div><!-- pull-right Ends -->
-
-        </h3><!-- panel-title Ends -->
-
-    </div><!-- panel-heading Ends -->
-
     <div class="panel-collapse collapse-data">
         <!-- panel-collapse collapse-data Starts -->
 
@@ -199,46 +173,20 @@ if (isset($_REQUEST['cat']) && is_array($_REQUEST['cat'])) {
             <ul class="nav nav-pills nav-stacked category-menu" id="dev-p-cats">
                 <!-- nav nav-pills nav-stacked category-menu Starts -->
 
-                <?php
+                
 
-                $get_p_cats = "select * from product_categories where p_cat_top='yes'";
-
-                $run_p_cats = mysqli_query($con, $get_p_cats);
-
-                while ($row_p_cats = mysqli_fetch_array($run_p_cats)) {
-
-                    $p_cat_id = $row_p_cats['p_cat_id'];
-
-                    $p_cat_title = $row_p_cats['p_cat_title'];
-
-                    $p_cat_image = $row_p_cats['p_cat_image'];
-
-                    if ($p_cat_image == "") {
-                    } else {
-
-                        $p_cat_image = "<img src='admin_area/other_images/$p_cat_image' width='20'> &nbsp;";
-                    }
-
-                    echo "
-
-                    <li class='checkbox checkbox-primary' style='background:#dddddd;' >
+                    <li class="checkbox checkbox-primary" style="background:#dddddd;">
 
                     <a>
 
                     <label>
 
-                    <input ";
-
-                                        if (isset($aPCat[$p_cat_id])) {
-                                            echo "checked='checked'";
-                                        }
-
-                                        echo " type='checkbox' value='$p_cat_id' name='p_cat' class='get_p_cat' id='p_cat' >
+                    <input type="checkbox" value="7" name="p_cat" class="get_p_cat" id="p_cat">
 
                     <span>
 
-                    $p_cat_image
-                    $p_cat_title
+                    <img src="admin_area/other_images/jacketicn.png" width="20"> &nbsp;
+                    jackets
 
                     </span>
 
@@ -248,47 +196,20 @@ if (isset($_REQUEST['cat']) && is_array($_REQUEST['cat'])) {
 
                     </li>
 
-                    ";
-                }
+                    
 
-                $get_p_cats = "select * from product_categories where p_cat_top='no'";
-
-                $run_p_cats = mysqli_query($con, $get_p_cats);
-
-                while ($row_p_cats = mysqli_fetch_array($run_p_cats)) {
-
-                    $p_cat_id = $row_p_cats['p_cat_id'];
-
-                    $p_cat_title = $row_p_cats['p_cat_title'];
-
-                    $p_cat_image = $row_p_cats['p_cat_image'];
-
-                    if ($p_cat_image == "") {
-                    } else {
-
-                        $p_cat_image = "<img src='admin_area/other_images/$p_cat_image' width='20'> &nbsp;";
-                    }
-
-                    echo "
-
-                    <li class='checkbox checkbox-primary'>
+                    <li class="checkbox checkbox-primary" style="background:#dddddd;">
 
                     <a>
 
                     <label>
 
-                    <input ";
-
-                                        if (isset($aPCat[$p_cat_id])) {
-                                            echo "checked='checked'";
-                                        }
-
-                                        echo " type='checkbox' value='$p_cat_id' name='p_cat' class='get_p_cat' id='p_cat' >
+                    <input type="checkbox" value="8" name="p_cat" class="get_p_cat" id="p_cat">
 
                     <span>
 
-                    $p_cat_image
-                    $p_cat_title
+                    <img src="admin_area/other_images/sneakericn.png" width="20"> &nbsp;
+                    Sneakers
 
                     </span>
 
@@ -298,16 +219,104 @@ if (isset($_REQUEST['cat']) && is_array($_REQUEST['cat'])) {
 
                     </li>
 
-                    ";
-                }
+                    
 
-                ?>
+                    <li class="checkbox checkbox-primary">
 
+                    <a>
+
+                    <label>
+
+                    <input type="checkbox" value="4" name="p_cat" class="get_p_cat" id="p_cat">
+
+                    <span>
+
+                    <img src="admin_area/other_images/coaticn.png" width="20"> &nbsp;
+                    Coats
+
+                    </span>
+
+                    </label>
+
+                    </a>
+
+                    </li>
+
+                    
+
+                    <li class="checkbox checkbox-primary">
+
+                    <a>
+
+                    <label>
+
+                    <input type="checkbox" value="5" name="p_cat" class="get_p_cat" id="p_cat">
+
+                    <span>
+
+                    <img src="admin_area/other_images/tshirticn.png" width="20"> &nbsp;
+                    T-Shirts
+
+                    </span>
+
+                    </label>
+
+                    </a>
+
+                    </li>
+
+                    
+
+                    <li class="checkbox checkbox-primary">
+
+                    <a>
+
+                    <label>
+
+                    <input type="checkbox" value="6" name="p_cat" class="get_p_cat" id="p_cat">
+
+                    <span>
+
+                    <img src="admin_area/other_images/sweatericn.png" width="20"> &nbsp;
+                    Sweater
+
+                    </span>
+
+                    </label>
+
+                    </a>
+
+                    </li>
+
+                    
+
+                    <li class="checkbox checkbox-primary">
+
+                    <a>
+
+                    <label>
+
+                    <input type="checkbox" value="9" name="p_cat" class="get_p_cat" id="p_cat">
+
+                    <span>
+
+                    <img src="admin_area/other_images/trousericn.png" width="20"> &nbsp;
+                    Trousers
+
+                    </span>
+
+                    </label>
+
+                    </a>
+
+                    </li>
+
+                    
             </ul><!-- nav nav-pills nav-stacked category-menu Ends -->
 
         </div><!-- panel-body scroll-menu Ends -->
 
-    </div><!-- panel-collapse collapse-data Ends -->
+    </div>
 
 </div>
 <!--- panel panel-default sidebar-menu Ends -->
