@@ -93,44 +93,40 @@ function getPro()
 
         echo "
 
-<div class='col-md-4 col-sm-6 single' >
+        <div class='col-md-4 col-sm-6 single' >
 
-<div class='product' >
+          <div class='product' >
 
-<a href='details.php?pro_id=$pro_id' >
+            <a href='details.php?pro_id=$pro_id' >
 
-<img src='admin_area/product_images/$pro_img1' class='img-responsive' >
+              <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
 
-</a>
+            </a>
 
-<div class='text' >
+            <div class='text' >
 
-<h3><a href='details.php?pro_id=$pro_id' >$pro_title</a></h3>
+              <h3><a href='details.php?pro_id=$pro_id' >$pro_title</a></h3>
 
-<p class='price' >$ $pro_price</p>
+              <p class='price' >$ $pro_price</p>
 
-<p class='buttons' >
+              <p class='buttons' >
 
-<a href='details.php?pro_id=$pro_id' class='btn btn-default' >View details</a>
+              <a href='details.php?pro_id=$pro_id' class='btn btn-default' >View details</a>
 
-<a href='details.php?pro_id=$pro_id' class='btn btn-primary'>
+              <a href='details.php?pro_id=$pro_id' class='btn btn-primary'>
 
-<i class='fa fa-shopping-cart'></i> Add to cart
+              <i class='fa fa-shopping-cart'></i> Add to cart
 
-</a>
+              </a>
 
+              </p>
 
-</p>
+            </div>
 
-</div>
+          </div>
 
+        </div>
 
-</div>
-
-</div>
-
-";
-
-    }
-
+        ";
+      } 
 }
