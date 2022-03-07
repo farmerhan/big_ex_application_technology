@@ -90,17 +90,17 @@ if (!isset($_SESSION['customer_email'])) {
 
             $message = "
 
-<h2>
-Email Confirmation By Computerfever.com $c_name
-</h2>
+                        <h2>
+                          Email Confirmation By Computerfever.com $c_name
+                        </h2>
 
-<a href='localhost/ecom_store/customer/my_account.php?$customer_confirm_code'>
+                        <a href='localhost/ecom_store/customer/my_account.php?$customer_confirm_code'>
 
-Click Here To Confirm Email
+                          Click Here To Confirm Email
 
-</a>
+                        </a>
 
-";
+                        ";
 
             $headers = "From: $from \r\n";
 
@@ -112,8 +112,6 @@ Click Here To Confirm Email
 
             echo "<script>window.open('my_account.php?my_orders','_self')</script>";
           }
-
-
 
           if (isset($_GET['my_orders'])) {
 
@@ -140,7 +138,6 @@ Click Here To Confirm Email
 
         </div><!-- box Ends -->
 
-
       </div>
       <!--- col-md-9 Ends -->
 
@@ -151,15 +148,15 @@ Click Here To Confirm Email
 
   <?php
 
-  include("../includes/footer.php");
+    include("../includes/footer.php");
 
   ?>
 
-  <script src="js/jquery.min.js"> </script>
+    <script src="js/jquery.min.js"> </script>
 
-  <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-  </body>
+    </body>
 
   </html>
 <?php } ?>
