@@ -26,7 +26,6 @@ include("includes/main.php");
   <div class="container">
     <!-- container Starts -->
 
-
     <div class="col-md-3">
       <!-- col-md-3 Starts -->
 
@@ -189,10 +188,10 @@ include("includes/footer.php");
 
 ?>
 
-<script src="js/jquery.min.js"> </script>
+  <script src="js/jquery.min.js"> </script>
 
-<script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
-</body>
+  </body>
 
 </html>

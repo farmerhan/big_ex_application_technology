@@ -29,10 +29,6 @@ include("includes/main.php");
   <div class="container">
     <!-- container Starts -->
 
-
-
-
-
     <div class="col-md-12">
       <!-- col-md-12 Starts -->
 
@@ -46,8 +42,6 @@ include("includes/main.php");
             <!-- center Starts -->
 
             <h2> Đăng kí tài khoản mới </h2>
-
-
 
           </center><!-- center Ends -->
 
@@ -187,12 +181,9 @@ include("includes/footer.php");
         $('.tick2').hide();
         $('.cross2').show();
 
-
       }
 
-
     });
-
 
   });
 </script>
@@ -310,18 +301,17 @@ if (isset($_POST['register'])) {
     $from = "sad.ahmed22224@gmail.com";
 
     $message = "
+                <h2>
+                  Email Confirmation By Computerfever.com $c_name
+                </h2>
 
-<h2>
-Email Confirmation By Computerfever.com $c_name
-</h2>
+                <a href='localhost/ecom_store/customer/my_account.php?$customer_confirm_code'>
 
-<a href='localhost/ecom_store/customer/my_account.php?$customer_confirm_code'>
+                  Click Here To Confirm Email
 
-Click Here To Confirm Email
+                </a>
 
-</a>
-
-";
+                ";
 
     $headers = "From: $from \r\n";
 

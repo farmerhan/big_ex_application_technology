@@ -306,70 +306,65 @@ include("includes/main.php");
 
             $product_label = "
 
-<a class='label sale' href='#' style='color:black;'>
+                <a class='label sale' href='#' style='color:black;'>
 
-<div class='thelabel'>$pro_label</div>
+                <div class='thelabel'>$pro_label</div>
 
-<div class='label-background'> </div>
+                <div class='label-background'> </div>
 
-</a>
+                </a>
 
-";
-          }
-
-
-          echo "
-
-<div class='col-md-3 col-sm-6 center-responsive' >
-
-<div class='product' >
-
-<a href='$pro_url' >
-
-<img src='admin_area/product_images/$pro_img1' class='img-responsive' >
-
-</a>
-
-<div class='text' >
-
-<hr>
-
-<h3><a href='$pro_url' >$pro_title</a></h3>
-
-<p class='price' > $product_price $product_psp_price </p>
-
-<p class='buttons' >
-
-<a href='$pro_url' class='btn btn-default' >View details</a>
-
-<a href='$pro_url' class='btn btn-primary'>
-
-<i class='fa fa-shopping-cart'></i> Add To Cart
-
-</a>
+                ";
+                          }
 
 
-</p>
+                          echo "
 
-</div>
+                <div class='col-md-3 col-sm-6 center-responsive' >
 
-$product_label
+                <div class='product' >
+
+                <a href='$pro_url' >
+
+                <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
+
+                </a>
+
+                <div class='text' >
+
+                <hr>
+
+                <h3><a href='$pro_url' >$pro_title</a></h3>
+
+                <p class='price' > $product_price $product_psp_price </p>
+
+                <p class='buttons' >
+
+                <a href='$pro_url' class='btn btn-default' >View details</a>
+
+                <a href='$pro_url' class='btn btn-primary'>
+
+                <i class='fa fa-shopping-cart'></i> Add To Cart
+
+                </a>
 
 
-</div>
+                </p>
 
-</div>
+                </div>
 
-";
+                $product_label
+
+
+                </div>
+
+                </div>
+
+                ";
         }
-
-
-
-
         ?>
 
       </div><!-- row same-height-row Ends -->
-
 
     </div><!-- col-md-9 Ends -->
 

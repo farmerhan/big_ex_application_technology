@@ -29,8 +29,6 @@ include("includes/main.php");
     <div class="col-md-12">
       <!--- col-md-12 Starts -->
 
-
-
     </div>
     <!--- col-md-12 Ends -->
 
@@ -43,7 +41,6 @@ include("includes/main.php");
 
     <div id="products" class="col-md-9">
       <!-- col-md-9 Starts --->
-
 
       <?php getProducts(); ?>
 
@@ -65,15 +62,11 @@ include("includes/main.php");
 
   </div><!-- col-md-9 Ends --->
 
-
-
 </div>
 <!--- wait Ends -->
 
 </div><!-- container Ends -->
 </div><!-- content Ends -->
-
-
 
 <?php
 
@@ -111,8 +104,6 @@ include("includes/footer.php");
     /// Hide And Show Code Ends ///
 
     /// Search Filters code Starts ///
-
-
 
     /// Search Filters code Ends ///
 

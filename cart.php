@@ -9,7 +9,6 @@ include("includes/main.php");
 
 ?>
 
-
 <!-- MAIN -->
 <main>
   <!-- HERO -->
