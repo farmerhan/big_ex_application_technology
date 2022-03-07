@@ -9,7 +9,6 @@
         If you have any questions, please feel free to contact us our customer service center is working for you 24/7.
     </p>
 
-
 </center><!-- center Ends -->
 
 <hr>
@@ -105,7 +104,6 @@
                                     <a href='cancel.php?order_id=$order_id' target='blank' class='btn btn-danger btn-xs'> Cancel Your Order </a>
                                   </td>";
                         }
-
                     ?>
 
                 </tr><!-- tr Ends -->
@@ -114,7 +112,6 @@
 
         </tbody>
         <!--- tbody Ends --->
-
 
     </table><!-- table table-bordered table-hover Ends -->
 
