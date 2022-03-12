@@ -91,19 +91,10 @@ include("includes/main.php");
                   <input type="password" class="form-control confirm" id="con_pass" required>
 
                 </div><!-- input-group Ends -->
-
-                <label>Ảnh đại diện: </label>
-                <input type="file" class="form-control" name="c_image" required>
               </div>
               <div class="col-sm-6 my-1">
-                <label>Quốc gia:</label>
-                <input type="text" class="form-control" name="c_country" required>
-
-                <label>Thành phố: </label>
-                <input type="text" class="form-control" name="c_city" required>
-
                 <label>Số điện thoại: </label>
-                <input type="text" class="form-control" name="c_contact" required>
+                <input type="text" class="form-control" name="c_phone" required>
 
                 <label>Địa chỉ: </label>
                 <input type="text" class="form-control" name="c_address" required>
@@ -246,42 +237,17 @@ include("includes/footer.php");
 <?php
 
 if (isset($_POST['register'])) {
-
-  // $secret = "6LcHnoQaAAAAAF3_pqQ55sZMDgaWCGcXq4ucLgkH";
-
-  // $response = $_POST['g-recaptcha-response'];
-
-  $remoteip = $_SERVER['REMOTE_ADDR'];
-
-  // $url = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response&remoteip=$remoteip");
-
-  // $result = json_decode($url, TRUE);
-
-  if ($result['success'] == 0) {
-
     $c_name = $_POST['c_name'];
 
     $c_email = $_POST['c_email'];
 
     $c_pass = $_POST['c_pass'];
 
-    $c_country = $_POST['c_country'];
-
-    $c_city = $_POST['c_city'];
-
-    $c_contact = $_POST['c_contact'];
+    $c_phone = $_POST['c_phone'];
 
     $c_address = $_POST['c_address'];
 
-    $c_image = $_FILES['c_image']['name'];
-
-    $c_image_tmp = $_FILES['c_image']['tmp_name'];
-
-    $c_ip = getRealUserIp();
-
-    move_uploaded_file($c_image_tmp, "customer/customer_images/$c_image");
-
-    $get_email = "select * from customers where customer_email='$c_email'";
+    $get_email = "select * from khach_hang where email='$c_email'";
 
     $run_email = mysqli_query($con, $get_email);
 
@@ -294,61 +260,16 @@ if (isset($_POST['register'])) {
       exit();
     }
 
-    $customer_confirm_code = mt_rand();
-
-    $subject = "Email Confirmation Message";
-
-    $from = "sad.ahmed22224@gmail.com";
-
-    $message = "
-                <h2>
-                  Email Confirmation By Computerfever.com $c_name
-                </h2>
-
-                <a href='localhost/ecom_store/customer/my_account.php?$customer_confirm_code'>
-
-                  Click Here To Confirm Email
-
-                </a>
-
-                ";
-
-    $headers = "From: $from \r\n";
-
-    $headers .= "Content-type: text/html\r\n";
-
-    mail($c_email, $subject, $message, $headers);
-
-    $insert_customer = "insert into customers (customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address,customer_image,customer_ip,customer_confirm_code) values ('$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address','$c_image','$c_ip','$customer_confirm_code')";
-
+    $insert_customer = "insert into khach_hang (ten_kh,email,dia_chi,mat_khau,so_dt) values ('$c_name','$c_email','$c_address','$c_pass','$c_phone')";
 
     $run_customer = mysqli_query($con, $insert_customer);
 
-    $sel_cart = "select * from cart where ip_add='$c_ip'";
 
-    $run_cart = mysqli_query($con, $sel_cart);
+    $_SESSION['customer_email'] = $c_email;
 
-    $check_cart = mysqli_num_rows($run_cart);
+    echo "<script>alert('Bạn đã đăng kí thành công')</script>";
 
-    if ($check_cart > 0) {
-
-      $_SESSION['customer_email'] = $c_email;
-
-      echo "<script>alert('Bạn đã đăng kí thành công')</script>";
-
-      echo "<script>window.open('checkout.php','_self')</script>";
-    } else {
-
-      $_SESSION['customer_email'] = $c_email;
-
-      echo "<script>alert('Bạn đã đăng kí thành công')</script>";
-
-      echo "<script>window.open('index.php','_self')</script>";
-    }
-  } else {
-
-    echo "<script>alert('Please Select Captcha, Try Again')</script>";
-  }
+    echo "<script>window.open('index.php','_self')</script>";
 }
 
 ?>

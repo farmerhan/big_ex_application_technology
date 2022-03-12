@@ -40,9 +40,13 @@ include("includes/main.php");
 
           <?php
 
-          $ip_add = getRealUserIp();
+          $query_get_cus_id = "SELECT * FROM khach_hang WHERE email='{$_SESSION['customer_email']}'";
 
-          $select_cart = "select * from cart where ip_add='$ip_add'";
+          $get_cus_id = mysqli_query($con, $query_get_cus_id);
+
+          $cus_id = mysqli_fetch_array($get_cus_id)['ma_kh'];
+
+          $select_cart = "select * from gio_hang where ma_khach_hang='$cus_id'";
 
           $run_cart = mysqli_query($con, $select_cart);
 
@@ -89,29 +93,30 @@ include("includes/main.php");
 
                 while ($row_cart = mysqli_fetch_array($run_cart)) {
 
-                  $pro_id = $row_cart['p_id'];
+                  $pro_id = $row_cart['ma_do_the_thao'];
 
-                  $pro_size = $row_cart['size'];
+                  $pro_size = $row_cart['kich_thuoc'];
 
-                  $pro_qty = $row_cart['qty'];
+                  $pro_qty = $row_cart['so_luong'];
 
-                  $only_price = $row_cart['p_price'];
+                  $pro_price = $row_cart['gia'];
 
-                  $get_products = "select * from products where product_id='$pro_id'";
+                  // Lấy thông tin sản phẩm để in ra
+                  $get_products = "select * from do_the_thao where ma_sp='$pro_id'";
 
                   $run_products = mysqli_query($con, $get_products);
 
-                  while ($row_products = mysqli_fetch_array($run_products)) {
+                  $row_products = mysqli_fetch_array($run_products);
 
-                    $product_title = $row_products['product_title'];
+                  $product_name = $row_products['ten_sp'];
 
-                    $product_img1 = $row_products['product_img1'];
+                  $product_img = $row_products['anh_chup'];
 
-                    $sub_total = $only_price * $pro_qty;
+                  $sub_total = $pro_price * $pro_qty;
 
-                    $_SESSION['pro_qty'] = $pro_qty;
+                  $_SESSION['pro_qty'] = $pro_qty;
 
-                    $total += $sub_total;
+                  $total += $sub_total;
 
                 ?>
 
@@ -120,13 +125,13 @@ include("includes/main.php");
 
                       <td>
 
-                        <img src="admin_area/product_images/<?php echo $product_img1; ?>">
+                        <img src="admin_area/product_images/<?php echo $product_img; ?>">
 
                       </td>
 
                       <td>
 
-                        <a href="#"> <?php echo $product_title; ?> </a>
+                        <a href="#"> <?php echo $product_name; ?> </a>
 
                       </td>
 
@@ -136,7 +141,7 @@ include("includes/main.php");
 
                       <td>
 
-                        $<?php echo $only_price; ?>.00
+                        $<?php echo $pro_price; ?>.00
 
                       </td>
 
@@ -158,8 +163,7 @@ include("includes/main.php");
 
                     </tr><!-- tr Ends -->
 
-                <?php }
-                } ?>
+                <?php }?>
 
               </tbody><!-- tbody Ends -->
 
@@ -216,7 +220,6 @@ include("includes/main.php");
 
         </form><!-- form Ends -->
 
-
       </div><!-- box Ends -->
 
       <?php
@@ -228,7 +231,7 @@ include("includes/main.php");
 
           foreach ($_POST['remove'] as $remove_id) {
 
-            $delete_product = "delete from cart where p_id='$remove_id'";
+            $delete_product = "delete from gio_hang where ma_do_the_thao='$remove_id'";
 
             $run_delete = mysqli_query($con, $delete_product);
 
@@ -242,128 +245,6 @@ include("includes/main.php");
       echo @$up_cart = update_cart();
 
       ?>
-
-      <div id="row same-height-row">
-        <!-- row same-height-row Starts -->
-
-        <div class="col-md-3 col-sm-6">
-          <!-- col-md-3 col-sm-6 Starts -->
-
-          <div class="box same-height headline">
-            <!-- box same-height headline Starts -->
-
-            <h3 class="text-center"> You may like these Products </h3>
-
-          </div><!-- box same-height headline Ends -->
-
-        </div><!-- col-md-3 col-sm-6 Ends -->
-
-        <?php
-
-        $get_products = "select * from products order by rand() LIMIT 0,3";
-
-        $run_products = mysqli_query($con, $get_products);
-
-        while ($row_products = mysqli_fetch_array($run_products)) {
-
-          $pro_id = $row_products['product_id'];
-
-          $pro_title = $row_products['product_title'];
-
-          $pro_price = $row_products['product_price'];
-
-          $pro_img1 = $row_products['product_img1'];
-
-          $pro_label = $row_products['product_label'];
-
-          $pro_psp_price = $row_products['product_psp_price'];
-
-          $pro_url = $row_products['product_url'];
-
-
-          if ($pro_label == "Sale" or $pro_label == "Gift") {
-
-            $product_price = "<del> $$pro_price </del>";
-
-            $product_psp_price = "| $$pro_psp_price";
-          } else {
-
-            $product_psp_price = "";
-
-            $product_price = "$$pro_price";
-          }
-
-
-          if ($pro_label == "") {
-          } else {
-
-            $product_label = "
-
-                              <a class='label sale' href='#' style='color:black;'>
-
-                              <div class='thelabel'>$pro_label</div>
-
-                              <div class='label-background'> </div>
-
-                              </a>
-
-                              ";
-          }
-
-
-          echo "
-
-          <div class='col-md-3 col-sm-6 center-responsive' >
-
-          <div class='product' >
-
-          <a href='$pro_url' >
-
-          <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
-
-          </a>
-
-          <div class='text' >
-
-          <hr>
-
-          <h3><a href='$pro_url' >$pro_title</a></h3>
-
-          <p class='price' > $product_price $product_psp_price </p>
-
-          <p class='buttons' >
-
-          <a href='$pro_url' class='btn btn-default' >View Details</a>
-
-          <a href='$pro_url' class='btn btn-danger'>
-
-          <i class='fa fa-shopping-cart'></i> Add To Cart
-
-          </a>
-
-
-          </p>
-
-          </div>
-
-          $product_label
-
-
-          </div>
-
-          </div>
-
-          ";
-        }
-
-
-
-
-        ?>
-
-
-      </div><!-- row same-height-row Ends -->
-
 
     </div><!-- col-md-9 Ends -->
 

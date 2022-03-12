@@ -25,7 +25,6 @@
             <tr>
                 <th>#</th>
                 <th>Amount</th>
-                <th>Invoice</th>
                 <th>Qty</th>
                 <th>Size</th>
                 <th>Order Date</th>
@@ -40,17 +39,17 @@
 
             <?php
 
-            $customer_session = $_SESSION['customer_email'];
+            $customer_email = $_SESSION['customer_email'];
 
-            $get_customer = "select * from customers where customer_email='$customer_session'";
+            $get_customer = "select * from khach_hang where email='$customer_email'";
 
             $run_customer = mysqli_query($con, $get_customer);
 
             $row_customer = mysqli_fetch_array($run_customer);
 
-            $customer_id = $row_customer['customer_id'];
+            $customer_id = $row_customer['ma_kh'];
 
-            $get_orders = "select * from customer_orders where customer_id='$customer_id'";
+            $get_orders = "select * from don_hang where ma_khach_hang='$customer_id'";
 
             $run_orders = mysqli_query($con, $get_orders);
 
@@ -58,23 +57,21 @@
 
             while ($row_orders = mysqli_fetch_array($run_orders)) {
 
-                $order_id = $row_orders['order_id'];
+                $order_id = $row_orders['ma_dh'];
 
-                $due_amount = $row_orders['due_amount'];
+                $due_amount = $row_orders['tong_tien'];
 
-                $invoice_no = $row_orders['invoice_no'];
+                $qty = $row_orders['so_luong_sp'];
 
-                $qty = $row_orders['qty'];
+                $order_date = substr($row_orders['ngay_dat_hang'], 0, 11);
 
-                $size = $row_orders['size'];
+                $size = $row_orders['kich_co'];
 
-                $order_date = substr($row_orders['order_date'], 0, 11);
-
-                $order_status = $row_orders['order_status'];
+                $order_status = $row_orders['trang_thai_don_hang'];
 
                 $i++;
 
-                if ($order_status == 'pending') {
+                if ($order_status == 'chua_thanh_toan') {
                     $order_status = "<b style='color:red;'>Unpaid</b>";
                 } else {
                     $order_status = "<b style='color:green;'>Paid</b>";
@@ -88,8 +85,6 @@
 
                     <td>$<?php echo $due_amount; ?></td>
 
-                    <td><?php echo $invoice_no; ?></td>
-
                     <td><?php echo $qty; ?></td>
 
                     <td><?php echo $size; ?></td>
@@ -99,7 +94,7 @@
                     <td><?php echo $order_status; ?></td>
 
                     <?php   
-                        if($row_orders['order_status'] == 'pending') {
+                        if($row_orders['trang_thai_don_hang'] == 'chua_thanh_toan') {
                             echo "<td>
                                     <a href='cancel.php?order_id=$order_id' target='blank' class='btn btn-danger btn-xs'> Cancel Your Order </a>
                                   </td>";

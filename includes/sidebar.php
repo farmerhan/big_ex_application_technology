@@ -1,4 +1,3 @@
-
 <div class="panel panel-default sidebar-menu">
     <!--- panel panel-default sidebar-menu Starts -->
 
@@ -27,13 +26,13 @@
 
     </div><!-- panel-heading Ends -->
 
-    <form class="panel-collapse collapse-data" action= "load.php" method= "POST">
+    <form class="panel-collapse collapse-data" action= "shop.php" method= "POST">
         <!-- panel-collapse collapse-data Starts -->
 
         <div class="panel-body"  style="display:flex;">
             <!-- panel-body Starts -->
-                <input id="input_search" type="text" class="form-control" name="txtTimKiem" id="dev-table-filter" data-action="filter" data-filters="#dev-p-cats" placeholder="Nhập vào tên sản phẩm">
-                <button class="button_control_panel" name="btnTimKiem" type="submit" style="border: 0; padding: 5px 12px; background:#dddddd;"><i class="fa fa-search"></i> </button>
+                <input id="input_search" type="text" class="form-control" name="input_name" id="dev-table-filter" data-action="filter" data-filters="#dev-p-cats" placeholder="Nhập vào tên sản phẩm">
+                <button class="button_control_panel" name="search_control" type="submit" style="border: 0; padding: 5px 12px; background:#dddddd;"><i class="fa fa-search"></i> </button>
 
         </div><!-- panel-body Ends -->
 
@@ -47,7 +46,7 @@
                     <li class="radio checkbox-primary" style="background:#dddddd; padding:10px;">
                     <a>
                     <label>
-                    <input class="input_price" type="radio" value="50" name="search" class="get_p_cat" id="p_cat">
+                    <input class="input_price" type="radio" value="50" name="input_price" class="get_p_cat" id="p_cat">
                     <span>
                         Dưới 50$
                     </span>
@@ -57,9 +56,9 @@
                     <li class="radio checkbox-primary" style="background:#dddddd; padding:10px;">
                     <a>
                     <label>
-                    <input class="input_price" type="radio" value="100" name="search" class="get_p_cat" id="p_cat">
+                    <input class="input_price" type="radio" value="100" name="input_price" class="get_p_cat" id="p_cat">
                     <span>
-                        50-100$
+                        Dưới 100$
                     </span>
                     </label>
                     </a>
@@ -67,9 +66,9 @@
                     <li class="radio checkbox-primary" style="padding:10px;">
                     <a>
                     <label>
-                    <input class="input_price" type="radio" value="200" name="search" class="get_p_cat" id="p_cat">
+                    <input class="input_price" type="radio" value="200" name="input_price" class="get_p_cat" id="p_cat">
                     <span>
-                        100-200$
+                        Dưới 200$
                     </span>
                     </label>
                     </a>
@@ -77,9 +76,9 @@
                     <li class="radio checkbox-primary" style="padding:10px; ">
                     <a>
                     <label>
-                    <input class="input_price" type="radio" value="201" name="search" class="get_p_cat" id="p_cat">
+                    <input class="input_price" type="radio" value="500" name="input_price" class="get_p_cat" id="p_cat">
                     <span>
-                        Trên 200$
+                        Dưới 500$
                     </span>
                     </label>
                     </a>

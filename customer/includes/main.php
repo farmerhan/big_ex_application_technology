@@ -123,15 +123,23 @@
 
               </li>
 
-              <li class="categories__item">
-                <div class="basket">
-                  <a href="../cart.php" class="btn btn--basket">
-                    <i class="icon-basket"></i>
-                    <?php items(); ?>
-                    <span> items</span>
-                  </a>
-                </div>
-              </li>
+              <?php
+            if (isset($_SESSION['customer_email'])) {
+                ?>
+            <li class="categories__item">
+              <div class="basket">
+                <a href="../cart.php" class="btn btn--basket">
+                  <i class="icon-basket"></i>
+                  <?php
+                    items();
+                        ?>
+                  <span> items</span>
+                </a>
+              </div>
+            </li>
+            <?php
+            }
+            ?>
 
             </ul>
           </nav>

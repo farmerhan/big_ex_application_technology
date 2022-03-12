@@ -1,4 +1,3 @@
-  
 </head>
 
 <body>
@@ -18,24 +17,23 @@
 
           <li class="login__item">
             <?php
-            if (!isset($_SESSION['customer_email'])) {
-              echo '<a href="customer_register.php" class="login__link">Register</a>';
-            } else {
-              echo '<a href="customer/my_account.php?my_orders" class="login__link">My Account</a>';
-            }
+              if (!isset($_SESSION['customer_email'])) {
+                  echo '<a href="customer_register.php" class="login__link">Register</a>';
+              } else {
+                  echo '<a href="customer/my_account.php?my_orders" class="login__link">My Account</a>';
+              }
             ?>
           </li>
 
 
           <li class="login__item">
             <?php
-            if (!isset($_SESSION['customer_email'])) {
-              echo '<a href="checkout.php" class="login__link">Sign In</a>';
-            } else {
-              echo '<a href="./logout.php" class="login__link">Logout</a>';
-            }
+              if (!isset($_SESSION['customer_email'])) {
+                  echo '<a href="checkout.php" class="login__link">Sign In</a>';
+              } else {
+                  echo '<a href="./logout.php" class="login__link">Logout</a>';
+              }
             ?>
-
           </li>
         </ul>
 
@@ -121,21 +119,26 @@
                   </div>
                 </div>
 
-
               </div>
 
             </li>
-
+            <?php
+            if (isset($_SESSION['customer_email'])) {
+                ?>
             <li class="categories__item">
               <div class="basket">
                 <a href="cart.php" class="btn btn--basket">
                   <i class="icon-basket"></i>
-                  <?php items(); ?> 
+                  <?php
+                    items();
+                        ?>
                   <span> items</span>
                 </a>
               </div>
             </li>
-
+            <?php
+            }
+            ?>
           </ul>
         </nav>
       </div>

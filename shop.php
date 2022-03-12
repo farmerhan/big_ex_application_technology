@@ -42,21 +42,9 @@ include("includes/main.php");
     <div id="products" class="col-md-9">
       <!-- col-md-9 Starts --->
 
-      <?php getProducts(); ?>
+      <?php getPro(); ?>
 
     </div><!-- row Ends -->
-
-    <center>
-      <!-- center Starts -->
-
-      <ul class="pagination">
-        <!-- pagination Starts -->
-
-        <?php getPaginator(); ?>
-
-      </ul><!-- pagination Ends -->
-
-    </center><!-- center Ends -->
     
     <center><a href="#"><button class="btn btn-outline-info"> Quay về đầu trang</button></a></center>
 
@@ -106,61 +94,6 @@ include("includes/footer.php");
     /// Search Filters code Starts ///
 
     /// Search Filters code Ends ///
-
-  });
-</script>
-
-
-<script>
-  $(document).ready(function() {
-
-    // getProducts Function Code Starts
-
-    function getProducts() {
-      const input_search_value = $('#input_search').val();
-      const input_price_value = [...$('.input_price')].filter(item => {
-        return item.checked;
-      })[0]?.value ?? '';
-
-      if(input_search_value !== '' || input_price_value !== '') {
-        $.ajax({
-  
-          url: "load.php",
-  
-          method: "POST",
-  
-          data: {
-            input_search_value,
-            input_price_value
-          },
-  
-          success: function(data) {
-  
-            $('#products').html('');
-  
-            $('#products').html(data);
-  
-            $("#wait").empty();
-  
-          }
-  
-        });
-      } else {
-        window.open('shop.php');
-      }
-
-      // ajax Code Ends
-
-    }
-
-    // getProducts Function Code Ends
-
-    $('.button_control_panel').click(function(event) {
-
-      getProducts();
-      event.preventDefault();
-
-    });
 
   });
 </script>
