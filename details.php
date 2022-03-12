@@ -66,7 +66,7 @@ if ($check_product == 0) {
 
             <div id="mainImage">
               <!-- mainImage Starts -->
-              <img src="./admin_area/product_images/<?php echo $pro_img; ?>" alt="Product Image">
+              <img src="./admin/product_images/<?php echo $pro_img; ?>" alt="Product Image">
 
             </div><!-- mainImage Ends -->
 
@@ -95,7 +95,7 @@ if ($check_product == 0) {
             $product_size = $_POST['product_size'];
 
             $sizeArray = ["S", "M", "XL"];
-
+            
             // Kiểm tra xem người dùng xem người dùng đã order hay chưa
             // Nếu có rồi thì thêm sản phẩm vào danh mục orders nữa
             // Còn chưa có thì sẽ thêm vào orders
@@ -119,7 +119,7 @@ if ($check_product == 0) {
                 // Kiểm tra tính hợp lệ của số lượng sản phẩm
                 echo "<script>alert('This Amount Product is invalid, please enter valid amount')</script>";
 
-            } else if (!array_search($product_size, $sizeArray)) {
+            } else if (!in_array($product_size, $sizeArray)) {
                 // Kiểm tra tính hợp lệ của kích cỡ sản phẩm
                 echo "<script>alert('" . array_search($product_size, $sizeArray) . "This size product is invalid, please enter valid size')</script>";
 

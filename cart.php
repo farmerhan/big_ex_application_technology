@@ -125,7 +125,7 @@ include("includes/main.php");
 
                       <td>
 
-                        <img src="admin_area/product_images/<?php echo $product_img; ?>">
+                        <img src="admin/product_images/<?php echo $product_img; ?>">
 
                       </td>
 

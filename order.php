@@ -29,7 +29,7 @@ while ($row_cart = mysqli_fetch_array($run_cart)) {
 
     $sub_total = $row_cart['gia'] * $pro_qty;
 
-    $insert_customer_order = "insert into don_hang (tong_tien, so_luong_sp, hinh_thuc_thanh_toan, ma_khach_hang, kich_co, ngay_dat_hang) values ($sub_total,$pro_qty,'truc_tiep',$cus_id,'$pro_size', NOW())";
+    $insert_customer_order = "insert into don_hang (tong_tien, so_luong_sp, hinh_thuc_thanh_toan, ma_khach_hang, kich_co, ngay_dat_hang, ma_sp) values ($sub_total,$pro_qty,'truc_tiep',$cus_id,'$pro_size', NOW(), $pro_id)";
 
     $run_customer_order = mysqli_query($con, $insert_customer_order);
 
