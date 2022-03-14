@@ -260,9 +260,13 @@ if (isset($_POST['register'])) {
       exit();
     }
 
-    $insert_customer = "insert into khach_hang (ten_kh,email,dia_chi,mat_khau,so_dt) values ('$c_name','$c_email','$c_address','$c_pass','$c_phone')";
+    $insert_customer = "insert into khach_hang (ten_kh,email,dia_chi,so_dt) values ('$c_name','$c_email','$c_address','$c_phone')";
 
     $run_customer = mysqli_query($con, $insert_customer);
+
+    $insert_account = "insert into tai_khoan (email,mat_khau,phan_quyen) values ('$c_email','$c_pass','')";
+
+    $run_account = mysqli_query($con, $insert_account);
 
 
     $_SESSION['customer_email'] = $c_email;

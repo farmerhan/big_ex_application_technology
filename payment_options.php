@@ -1,16 +1,6 @@
 <div class="box">
   <!-- box Starts -->
 
-  <?php
-
-    $query_get_cus_id = "SELECT * FROM khach_hang WHERE email='{$_SESSION['customer_email']}'";
-
-    $get_cus_id = mysqli_query($con, $query_get_cus_id);
-
-    $cus_id = mysqli_fetch_array($get_cus_id)['ma_kh'];
-
-  ?>
-
   <h1 class="text-center">Chọn phương thức thanh toán</h1>
 
   <p class="lead text-center">

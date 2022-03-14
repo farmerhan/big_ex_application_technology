@@ -29,6 +29,7 @@
                 <th>Size</th>
                 <th>Order Date</th>
                 <th>Status</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
 
@@ -41,15 +42,7 @@
 
             $customer_email = $_SESSION['customer_email'];
 
-            $get_customer = "select * from khach_hang where email='$customer_email'";
-
-            $run_customer = mysqli_query($con, $get_customer);
-
-            $row_customer = mysqli_fetch_array($run_customer);
-
-            $customer_id = $row_customer['ma_kh'];
-
-            $get_orders = "select * from don_hang where ma_khach_hang='$customer_id'";
+            $get_orders = "select * from don_hang_san_pham, don_hang where don_hang.ma_dh = don_hang_san_pham.ma_dh and ma_khach_hang='$customer_email'";
 
             $run_orders = mysqli_query($con, $get_orders);
 
@@ -57,15 +50,21 @@
 
             while ($row_orders = mysqli_fetch_array($run_orders)) {
 
+                $prod_id=$row_orders['ma_sp'];
+
                 $order_id = $row_orders['ma_dh'];
 
-                $due_amount = $row_orders['tong_tien'];
+                $due_amount = $row_orders['thanh_tien'];
 
                 $qty = $row_orders['so_luong_sp'];
 
                 $order_date = substr($row_orders['ngay_dat_hang'], 0, 11);
 
                 $size = $row_orders['kich_co'];
+
+                $get_img_prod = "select anh_chup from do_the_thao where ma_sp={$row_orders['ma_sp']}";
+
+                $product_img = mysqli_fetch_array(mysqli_query($con, $get_img_prod))['anh_chup'];
 
                 $order_status = $row_orders['trang_thai_don_hang'];
 
@@ -93,10 +92,12 @@
 
                     <td><?php echo $order_status; ?></td>
 
+                    <td><img width="70" height="70" src="../admin/product_images/<?php echo $product_img; ?>"></td>
+
                     <?php   
                         if($row_orders['trang_thai_don_hang'] == 'chua_thanh_toan') {
                             echo "<td>
-                                    <a href='cancel.php?order_id=$order_id' target='blank' class='btn btn-danger btn-xs'> Cancel Your Order </a>
+                                    <a href='cancel.php?order_id=$order_id&prod_id=$prod_id' target='blank' class='btn btn-danger btn-xs'> Cancel Your Order </a>
                                   </td>";
                         }
                     ?>

@@ -40,13 +40,7 @@ include("includes/main.php");
 
           <?php
 
-          $query_get_cus_id = "SELECT * FROM khach_hang WHERE email='{$_SESSION['customer_email']}'";
-
-          $get_cus_id = mysqli_query($con, $query_get_cus_id);
-
-          $cus_id = mysqli_fetch_array($get_cus_id)['ma_kh'];
-
-          $select_cart = "select * from gio_hang where ma_khach_hang='$cus_id'";
+          $select_cart = "select * from gio_hang where email='{$_SESSION['customer_email']}'";
 
           $run_cart = mysqli_query($con, $select_cart);
 

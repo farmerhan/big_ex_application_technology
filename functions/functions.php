@@ -8,13 +8,7 @@ function items()
 {
     global $db;
 
-    $get_cus = "select ma_kh from khach_hang where email='{$_SESSION['customer_email']}'";
-
-    $result_get_cus = mysqli_query($db, $get_cus);
-
-    $cus_id = mysqli_fetch_array($result_get_cus)['ma_kh'];
-
-    $get_items = "select * from gio_hang where ma_khach_hang='$cus_id'";
+    $get_items = "select * from gio_hang where ma_khach_hang='{$_SESSION['customer_email']}'";
 
     $run_items = mysqli_query($db, $get_items);
 

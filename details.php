@@ -94,18 +94,13 @@ if ($check_product == 0) {
 
             $product_size = $_POST['product_size'];
 
-            $sizeArray = ["S", "M", "XL"];
+            $sizeArray = ["S", "M", "L", "XL", "2XL", "3XL", "4XL"];
             
             // Kiểm tra xem người dùng xem người dùng đã order hay chưa
             // Nếu có rồi thì thêm sản phẩm vào danh mục orders nữa
             // Còn chưa có thì sẽ thêm vào orders
-            $query = "SELECT * FROM khach_hang WHERE email='{$_SESSION['customer_email']}'";
 
-            $get_cus = mysqli_query($con, $query);
-
-            $id_cus = mysqli_fetch_array($get_cus)['ma_kh'];
-
-            $check_product = "select * from gio_hang where ma_khach_hang=$id_cus AND ma_do_the_thao='$pro_id'";
+            $check_product = "select * from gio_hang where ma_khach_hang='{$_SESSION['customer_email']}' AND ma_do_the_thao='$pro_id'";
 
             $run_check = mysqli_query($con, $check_product);
 
@@ -125,7 +120,7 @@ if ($check_product == 0) {
 
             } else {
                 // Chèn vào csdl
-                $query = "insert into gio_hang (ma_do_the_thao, so_luong, kich_thuoc, gia, ma_khach_hang) values ('$pro_id','$product_qty','$product_size','$pro_price','$id_cus')";
+                $query = "insert into gio_hang (ma_do_the_thao, so_luong, kich_thuoc, gia, ma_khach_hang) values ('$pro_id','$product_qty','$product_size','$pro_price','{$_SESSION['customer_email']}')";
 
                 $run_query = mysqli_query($db, $query);
 

@@ -49,7 +49,7 @@ include "includes/db.php";
 
 if (isset($_POST['admin_login'])) {
 
-    $get_admin = "select * from nguoi_quan_tri where email='{$_POST['admin_email']}' AND mat_khau='{$_POST['admin_pass']}'";
+    $get_admin = "select * from tai_khoan where email='{$_POST['admin_email']}' AND mat_khau='{$_POST['admin_pass']}' AND phan_quyen='admin'";
 
     $run_admin = mysqli_query($con, $get_admin);
 

@@ -176,23 +176,32 @@ if(isset($_POST['submit'])){
 
   $product_url = $_POST['product_url'];
 
-  $product_img = $_FILES['product_img']['name'];
+  // Kiểm tra url sản phẩm
+  $get_same_url_prod = "select url_san_pham from do_the_thao where url_san_pham='$product_url'";
 
-  $temp_name = $_FILES['product_img']['tmp_name'];
+  $qty_same_url_prod = mysqli_query($con, $get_same_url_prod);
 
-  move_uploaded_file($temp_name,"product_images/$product_img");
-
-  $insert_product = "insert into do_the_thao (ten_sp,gia_sp,anh_chup,url_san_pham) values ('$product_name',$product_price,'$product_img', '$product_url')";
-
-  $run_product = mysqli_query($con,$insert_product);
-
-  if($run_product){
-
-    echo "<script>alert('Product has been inserted successfully')</script>";
-
-    echo "<script>window.open('index.php?insert_product','_self')</script>";
-
+  if($qty_same_url_prod > 0) {
+    echo "<script>alert('Url for product has been existed !')</script>";
+  } else {
+    $product_img = $_FILES['product_img']['name'];
+  
+    $temp_name = $_FILES['product_img']['tmp_name'];
+  
+    move_uploaded_file($temp_name,"product_images/$product_img");
+  
+    $insert_product = "insert into do_the_thao (ten_sp,gia_sp,anh_chup,url_san_pham) values ('$product_name',$product_price,'$product_img', '$product_url')";
+  
+    $run_product = mysqli_query($con,$insert_product);
+  
+    if($run_product){
+  
+      echo "<script>alert('Product has been inserted successfully')</script>";
+  
+      
+    }
   }
+  echo "<script>window.open('index.php?insert_product','_self')</script>";
 
 }
 

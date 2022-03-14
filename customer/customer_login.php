@@ -63,7 +63,7 @@ if (isset($_POST['login'])) {
 
     $customer_pass = $_POST['c_pass'];
 
-    $select_customer = "select * from khach_hang where email='$customer_email' AND mat_khau='$customer_pass'";
+    $select_customer = "select * from tai_khoan where email='$customer_email' AND mat_khau='$customer_pass'";
 
     $result = mysqli_query($con, $select_customer);  
 

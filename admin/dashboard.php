@@ -94,7 +94,7 @@ if (!isset($_SESSION['admin_email'])) {
 
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right Starts -->
                         <?php 
-                            $query_get_solved_prod = "SELECT ma_dh FROM don_hang WHERE MONTH(ngay_thanh_toan)=MONTH(NOW())";
+                            $query_get_solved_prod = "SELECT ma_dh FROM don_hang WHERE MONTH(ngay_thanh_toan)=MONTH(NOW()) AND trang_thai_don_hang='da_thanh_toan'";
 
                             $get_solved_prod = mysqli_query($con, $query_get_solved_prod);
 
@@ -181,9 +181,18 @@ if (!isset($_SESSION['admin_email'])) {
 
             <div class="panel-heading" ><!-- panel-heading Starts -->
 
-                <h3 class="panel-title" ><!-- panel-title Starts -->
+                <h3 class="panel-title" style="display: flex; justify-content: space-between;" ><!-- panel-title Starts -->
 
-                    <i class="fa fa-money fa-fw" ></i> New Orders
+                    <span>
+                        <i class="fa fa-money fa-fw" ></i> New Orders
+                    </span>
+
+
+                    <?php 
+                        if(isset($_GET['get_detail_order'])) {
+                    ?>
+                        <a style="text-decoration: underline;" href="index.php?dashboard">Back To Dashboard</a>
+                    <?php } ?>
 
                 </h3><!-- panel-title Ends -->
 
@@ -193,6 +202,9 @@ if (!isset($_SESSION['admin_email'])) {
 
                 <div class="table-responsive" ><!-- table-responsive Starts -->
 
+
+                    <?php if(!isset($_GET['get_detail_order'])) { ?>
+
                     <table class="table table-bordered table-hover table-striped" ><!-- table table-bordered table-hover table-striped Starts -->
 
                         <thead><!-- thead Starts -->
@@ -200,15 +212,12 @@ if (!isset($_SESSION['admin_email'])) {
                             <tr>
                                 <th>Order #</th>
                                 <th>Customer Phone</th>
+                                <th>Customer Addr</th>
                                 <th>Invoice No</th>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>Product Image</th>
-                                <th>Qty</th>
-                                <th>Size</th>
                                 <th>Status</th>
                                 <th>Amount</th>
                                 <th>Order Date</th>
+                                <th>Control</th>
                             </tr>
 
                         </thead><!-- thead Ends -->
@@ -229,25 +238,11 @@ if (!isset($_SESSION['admin_email'])) {
 
                                     $c_id = $row_order['ma_khach_hang'];
 
-                                    $product_id = $row_order['ma_sp'];
-
-                                    $qty = $row_order['so_luong_sp'];
-
-                                    $size = $row_order['kich_co'];
-
                                     $order_status = $row_order['trang_thai_don_hang'];
 
                                     $order_amount = $row_order['tong_tien'];
 
                                     $order_date = $row_order['ngay_dat_hang'];
-
-                                    $get_products = "select * from do_the_thao where ma_sp=$product_id";
-
-                                    $run_products = mysqli_query($con, $get_products);
-                            
-                                    $row_products = mysqli_fetch_array($run_products);
-
-                                    $pro_image = $row_products['anh_chup'];
 
                                     $i++;
 
@@ -261,33 +256,18 @@ if (!isset($_SESSION['admin_email'])) {
 
                             <?php
 
-                                    $get_customer = "select * from khach_hang where ma_kh='$c_id'";
+                                    $get_customer = "select * from khach_hang where email='$c_id'";
                                     $run_customer = mysqli_query($con, $get_customer);
                                     $row_customer = mysqli_fetch_array($run_customer);
                                     $customer_email = $row_customer['so_dt'];
+                                    $customer_addr = $row_customer['dia_chi'];
                                     echo $customer_email;
                                     ?>
                             </td>
 
+                            <td><?php echo $customer_addr; ?></td>
+
                             <td><?php echo $order_id; ?></td>
-
-                            <td><?php echo $product_id; ?></td>
-
-                            <?php 
-                                $query_get_prod = "SELECT * FROM do_the_thao WHERE ma_sp='$product_id'";
-
-                                $get_prod = mysqli_query($con, $query_get_prod);
-
-                                $prods = mysqli_fetch_array($get_prod);
-                            ?>
-
-                            <td><?php echo $prods['ten_sp']; ?></td>
-
-                            <center><td><img src="product_images/<?php echo $pro_image; ?>" width="60" height="60"></td></center>
-
-                            <td><?php echo $qty; ?></td>
-
-                            <td><?php echo $size; ?></td>
 
                             <?php
                                 if ($order_status == 'chua_thanh_toan') {
@@ -303,6 +283,10 @@ if (!isset($_SESSION['admin_email'])) {
 
                             <td><?php echo $order_date; ?></td>
 
+                            <td>
+                                <a href="index.php?dashboard&get_detail_order=<?php echo $order_id ?>">View detail</a>
+                            </td>
+
                             </tr>
 
                             <?php }?>
@@ -311,6 +295,92 @@ if (!isset($_SESSION['admin_email'])) {
 
 
                     </table><!-- table table-bordered table-hover table-striped Ends -->
+
+                    <?php } else if(!empty($_GET['get_detail_order'])) { ?>
+                        <table class="table table-bordered table-hover table-striped" ><!-- table table-bordered table-hover table-striped Starts -->
+
+                            <thead><!-- thead Starts -->
+
+                                <tr>
+                                    <th>Detail Order #</th>
+                                    <th>Invoice Number</th>
+                                    <th>Product Name</th>
+                                    <th>Product Image</th>
+                                    <th>Quantity</th>
+                                    <th>Size</th>
+                                    <th>Amount</th>
+                                </tr>
+
+                            </thead><!-- thead Ends -->
+
+                            <tbody><!-- tbody Starts -->
+
+                                <?php
+
+                                    $i = 0;
+
+                                    $get_order = "select * from don_hang_san_pham where ma_dh={$_GET['get_detail_order']}";
+                                    
+                                    $run_order = mysqli_query($con, $get_order);
+
+                                    while ($row_order = mysqli_fetch_array($run_order)) {
+
+                                        $order_id = $row_order['ma_dh'];
+
+                                        $order_amount = $row_order['thanh_tien'];
+
+                                        $order_qty = $row_order['so_luong_sp'];
+
+                                        $order_size = $row_order['kich_co'];
+
+                                        $product_id = $row_order['ma_sp'];
+
+                                        $get_products = "select * from do_the_thao where ma_sp=$product_id";
+
+                                        $run_products = mysqli_query($con, $get_products);
+                                
+                                        $row_products = mysqli_fetch_array($run_products);
+
+                                        $pro_image = $row_products['anh_chup'];
+
+                                        $i++;
+
+                                    ?>
+
+                                <tr>
+
+                                <td><?php echo $i; ?></td>
+
+                                <td><?php echo $order_id; ?></td>
+
+                                <?php 
+                                    $query_get_prod = "SELECT * FROM do_the_thao WHERE ma_sp='$product_id'";
+
+                                    $get_prod = mysqli_query($con, $query_get_prod);
+
+                                    $prods = mysqli_fetch_array($get_prod);
+                                ?>
+
+                                <td><?php echo $prods['ten_sp']; ?></td>
+
+                                <center><td><img src="product_images/<?php echo $pro_image; ?>" width="60" height="60"></td></center>
+
+                                <td><?php echo $order_qty; ?></td>
+
+                                <td><?php echo $order_size; ?></td>
+
+                                <td>$ <?php echo $order_amount; ?></td>
+
+                                </tr>
+
+                                <?php } ?>
+
+                            </tbody><!-- tbody Ends -->
+
+
+                        </table><!-- table table-bordered table-hover table-striped Ends -->   
+                        
+                        <?php } ?>
 
                 </div><!-- table-responsive Ends -->
 

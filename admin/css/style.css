@@ -18,9 +18,9 @@ margin-top:100px;
 
 }
 
-td {
+/* td, th {
     text-align:center!important;
-}
+} */
 
 @media (min-width: 768px) {
 

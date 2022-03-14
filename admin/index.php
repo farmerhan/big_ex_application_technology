@@ -16,7 +16,7 @@ if (!isset($_SESSION['admin_email'])) {
 
     $admin_session = $_SESSION['admin_email'];
 
-    $get_admin = "select * from nguoi_quan_tri  where email='$admin_session'";
+    $get_admin = "select * from nguoi_quan_tri where email='$admin_session'";
 
     $run_admin = mysqli_query($con, $get_admin);
 

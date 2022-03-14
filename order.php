@@ -9,15 +9,26 @@ include "functions/functions.php";
 
 <?php
 
-$query_get_cus_id = "SELECT * FROM khach_hang WHERE email='{$_SESSION['customer_email']}'";
+$select_cart = "select * from gio_hang where ma_khach_hang='{$_SESSION['customer_email']}'";
 
-$get_cus_id = mysqli_query($con, $query_get_cus_id);
+$get_addr_cus = "select dia_chi from khach_hang where email='{$_SESSION['customer_email']}'";
 
-$cus_id = mysqli_fetch_array($get_cus_id)['ma_kh'];
-
-$select_cart = "select * from gio_hang where ma_khach_hang='$cus_id'";
+$addr_cus = mysqli_fetch_array(mysqli_query($con, $get_addr_cus))['dia_chi'];
 
 $run_cart = mysqli_query($con, $select_cart);
+
+// Trước khi thêm sản phẩm vào don_hang_san_pham thì thêm một bản ghi vào trong bảng đơn hàng trước
+
+$insert_customer_order = "insert into don_hang (hinh_thuc_thanh_toan, ma_khach_hang, ngay_dat_hang, dia_chi_giao_hang) values ('truc_tiep','{$_SESSION['customer_email']}', NOW(), '$addr_cus')";
+
+$run_customer_order = mysqli_query($con, $insert_customer_order);
+
+$last_id_order = mysqli_insert_id($con);
+
+// Biến tổng tiền cho đơn hàng
+$total_orders_amount = 0;
+
+// Lấy ra những  sản phẩm có trong giỏ hàng
 
 while ($row_cart = mysqli_fetch_array($run_cart)) {
 
@@ -29,11 +40,13 @@ while ($row_cart = mysqli_fetch_array($run_cart)) {
 
     $sub_total = $row_cart['gia'] * $pro_qty;
 
-    $insert_customer_order = "insert into don_hang (tong_tien, so_luong_sp, hinh_thuc_thanh_toan, ma_khach_hang, kich_co, ngay_dat_hang, ma_sp) values ($sub_total,$pro_qty,'truc_tiep',$cus_id,'$pro_size', NOW(), $pro_id)";
+    $total_orders_amount += $sub_total;
+
+    $insert_customer_order = "insert into don_hang_san_pham (ma_dh, thanh_tien, so_luong_sp, kich_co, ma_sp) values ($last_id_order, $sub_total,$pro_qty,'$pro_size', $pro_id)";
 
     $run_customer_order = mysqli_query($con, $insert_customer_order);
 
-    $delete_cart = "delete from gio_hang where ma_khach_hang='$cus_id'";
+    $delete_cart = "delete from gio_hang where ma_khach_hang='{$_SESSION['customer_email']}'";
 
     $run_delete = mysqli_query($con, $delete_cart);
 
@@ -41,7 +54,10 @@ while ($row_cart = mysqli_fetch_array($run_cart)) {
 
     echo "<script>window.open('customer/my_account.php?my_orders','_self')</script>";
 
-    echo $insert_customer_order;
 }
+
+$update_customer_order = "update don_hang set tong_tien=$total_orders_amount where ma_dh=$last_id_order";
+
+mysqli_query($con, $update_customer_order);
 
 ?>
