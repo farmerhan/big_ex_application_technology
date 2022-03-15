@@ -179,11 +179,25 @@ if(isset($_POST['submit'])){
   // Kiểm tra url sản phẩm
   $get_same_url_prod = "select url_san_pham from do_the_thao where url_san_pham='$product_url'";
 
-  $qty_same_url_prod = mysqli_query($con, $get_same_url_prod);
+  $qty_same_url_prod = mysqli_num_rows(mysqli_query($con, $get_same_url_prod));
+
+  // Mảng đuôi file hợp lệ
+  $valid_file_array = ['image/jpg', 'image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/tiff', 'image/jpeg'];
 
   if($qty_same_url_prod > 0) {
+
     echo "<script>alert('Url for product has been existed !')</script>";
+
+  } else if(!intval($product_price) > 0) {
+
+    echo "<script>alert('Price must be a number !')</script>";
+
+  } else  if(!in_array($_FILES['product_img']['type'], $valid_file_array)) {
+
+    echo "<script>alert('{$_FILES['product_img']['type']} Product Image must be image !')</script>";
+
   } else {
+
     $product_img = $_FILES['product_img']['name'];
   
     $temp_name = $_FILES['product_img']['tmp_name'];

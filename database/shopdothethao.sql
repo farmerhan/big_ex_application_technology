@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 12, 2022 lúc 04:42 PM
+-- Thời gian đã tạo: Th3 15, 2022 lúc 01:18 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -31,22 +31,40 @@ CREATE TABLE `don_hang` (
   `ma_dh` int(11) NOT NULL,
   `tong_tien` double NOT NULL,
   `ngay_dat_hang` timestamp NOT NULL DEFAULT current_timestamp(),
-  `trang_thai_don_hang` enum('chua_thanh_toan','da_thanh_toan','','') NOT NULL,
-  `so_luong_sp` int(11) NOT NULL,
+  `trang_thai_don_hang` enum('chua_thanh_toan','da_thanh_toan','dang_giao_hang','') NOT NULL,
   `hinh_thuc_thanh_toan` enum('truc_tiep','lien_ket_ngan_hang','','') NOT NULL,
-  `ma_khach_hang` int(11) NOT NULL,
-  `kich_co` enum('S','M','L','XL','2XL','3XL','4XL') NOT NULL,
-  `ma_sp` int(11) NOT NULL,
-  `ngay_thanh_toan` timestamp NULL DEFAULT NULL
+  `ma_khach_hang` varchar(50) NOT NULL,
+  `ngay_thanh_toan` timestamp NULL DEFAULT NULL,
+  `dia_chi_giao_hang` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `don_hang`
 --
 
-INSERT INTO `don_hang` (`ma_dh`, `tong_tien`, `ngay_dat_hang`, `trang_thai_don_hang`, `so_luong_sp`, `hinh_thuc_thanh_toan`, `ma_khach_hang`, `kich_co`, `ma_sp`, `ngay_thanh_toan`) VALUES
-(4, 196, '2022-03-12 09:38:45', 'da_thanh_toan', 2, 'truc_tiep', 2, 'M', 4, '2022-03-12 09:38:45'),
-(5, 98, '2022-03-12 10:08:09', 'da_thanh_toan', 1, 'truc_tiep', 2, 'M', 4, '2022-03-12 09:38:45');
+INSERT INTO `don_hang` (`ma_dh`, `tong_tien`, `ngay_dat_hang`, `trang_thai_don_hang`, `hinh_thuc_thanh_toan`, `ma_khach_hang`, `ngay_thanh_toan`, `dia_chi_giao_hang`) VALUES
+(23, 420, '2022-03-14 01:34:35', 'da_thanh_toan', 'truc_tiep', 'wilsonkylerkl@gmail.com', '2022-03-15 01:44:01', 'Los Angeles');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `don_hang_san_pham`
+--
+
+CREATE TABLE `don_hang_san_pham` (
+  `ma_dh` int(11) NOT NULL,
+  `thanh_tien` double NOT NULL,
+  `so_luong_sp` int(11) NOT NULL,
+  `kich_co` enum('S','M','L','XL','2XL','3XL','4XL') NOT NULL,
+  `ma_sp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang_san_pham`
+--
+
+INSERT INTO `don_hang_san_pham` (`ma_dh`, `thanh_tien`, `so_luong_sp`, `kich_co`, `ma_sp`) VALUES
+(23, 420, 3, 'S', 4);
 
 -- --------------------------------------------------------
 
@@ -84,15 +102,8 @@ CREATE TABLE `gio_hang` (
   `so_luong` int(11) NOT NULL,
   `kich_thuoc` enum('S','M','L','XL','2XL','3XL','4XL') NOT NULL,
   `gia` double NOT NULL,
-  `ma_khach_hang` int(11) NOT NULL
+  `ma_khach_hang` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `gio_hang`
---
-
-INSERT INTO `gio_hang` (`ma_gio_hang`, `ma_do_the_thao`, `so_luong`, `kich_thuoc`, `gia`, `ma_khach_hang`) VALUES
-(8, 4, 2, 'S', 140, 2);
 
 -- --------------------------------------------------------
 
@@ -101,20 +112,19 @@ INSERT INTO `gio_hang` (`ma_gio_hang`, `ma_do_the_thao`, `so_luong`, `kich_thuoc
 --
 
 CREATE TABLE `khach_hang` (
-  `ma_kh` int(11) NOT NULL,
   `ten_kh` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
   `dia_chi` text NOT NULL,
-  `mat_khau` varchar(20) NOT NULL,
-  `so_dt` varchar(15) NOT NULL
+  `so_dt` varchar(15) NOT NULL,
+  `ngay_sinh` date DEFAULT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `khach_hang`
 --
 
-INSERT INTO `khach_hang` (`ma_kh`, `ten_kh`, `email`, `dia_chi`, `mat_khau`, `so_dt`) VALUES
-(2, 'wils', 'wilsonkylerkl@gmail.com', '3213', '123456', '0123456789');
+INSERT INTO `khach_hang` (`ten_kh`, `dia_chi`, `so_dt`, `ngay_sinh`, `email`) VALUES
+('wils', 'Los Angeles', '0123456789', NULL, 'wilsonkylerkl@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -123,18 +133,37 @@ INSERT INTO `khach_hang` (`ma_kh`, `ten_kh`, `email`, `dia_chi`, `mat_khau`, `so
 --
 
 CREATE TABLE `nguoi_quan_tri` (
-  `id` int(11) NOT NULL,
   `ten` varchar(100) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `mat_khau` varchar(20) NOT NULL
+  `so_dt` varchar(15) NOT NULL,
+  `dia_chi` text NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `nguoi_quan_tri`
 --
 
-INSERT INTO `nguoi_quan_tri` (`id`, `ten`, `email`, `mat_khau`) VALUES
-(1, 'abx', 'wilsonkylerkl@gmail.com', '123456');
+INSERT INTO `nguoi_quan_tri` (`ten`, `so_dt`, `dia_chi`, `email`) VALUES
+('abx', '0123456789', 'los angeles', 'wilsonkylerkl@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tai_khoan`
+--
+
+CREATE TABLE `tai_khoan` (
+  `email` varchar(50) NOT NULL,
+  `mat_khau` varchar(20) NOT NULL,
+  `phan_quyen` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tai_khoan`
+--
+
+INSERT INTO `tai_khoan` (`email`, `mat_khau`, `phan_quyen`) VALUES
+('wilsonkylerkl@gmail.com', '123456', 'admin');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -144,31 +173,48 @@ INSERT INTO `nguoi_quan_tri` (`id`, `ten`, `email`, `mat_khau`) VALUES
 -- Chỉ mục cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  ADD PRIMARY KEY (`ma_dh`);
+  ADD PRIMARY KEY (`ma_dh`),
+  ADD KEY `fk_foreign_kh` (`ma_khach_hang`);
+
+--
+-- Chỉ mục cho bảng `don_hang_san_pham`
+--
+ALTER TABLE `don_hang_san_pham`
+  ADD PRIMARY KEY (`ma_dh`,`ma_sp`),
+  ADD KEY `fk_foreign_sp` (`ma_sp`);
 
 --
 -- Chỉ mục cho bảng `do_the_thao`
 --
 ALTER TABLE `do_the_thao`
-  ADD PRIMARY KEY (`ma_sp`);
+  ADD PRIMARY KEY (`ma_sp`),
+  ADD UNIQUE KEY `url_san_pham` (`url_san_pham`) USING HASH;
 
 --
 -- Chỉ mục cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  ADD PRIMARY KEY (`ma_gio_hang`,`ma_do_the_thao`);
+  ADD PRIMARY KEY (`ma_gio_hang`,`ma_do_the_thao`),
+  ADD KEY `fk_foreign_kh_gh` (`ma_khach_hang`),
+  ADD KEY `fk_foreign_kh_sp` (`ma_do_the_thao`);
 
 --
 -- Chỉ mục cho bảng `khach_hang`
 --
 ALTER TABLE `khach_hang`
-  ADD PRIMARY KEY (`ma_kh`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Chỉ mục cho bảng `nguoi_quan_tri`
 --
 ALTER TABLE `nguoi_quan_tri`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Chỉ mục cho bảng `tai_khoan`
+--
+ALTER TABLE `tai_khoan`
+  ADD PRIMARY KEY (`email`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -178,31 +224,49 @@ ALTER TABLE `nguoi_quan_tri`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `ma_dh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ma_dh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `do_the_thao`
 --
 ALTER TABLE `do_the_thao`
-  MODIFY `ma_sp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ma_sp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  MODIFY `ma_gio_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ma_gio_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT cho bảng `khach_hang`
+-- Các ràng buộc cho các bảng đã đổ
 --
-ALTER TABLE `khach_hang`
-  MODIFY `ma_kh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `nguoi_quan_tri`
+-- Các ràng buộc cho bảng `don_hang`
 --
-ALTER TABLE `nguoi_quan_tri`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `don_hang`
+  ADD CONSTRAINT `fk_foreign_kh` FOREIGN KEY (`ma_khach_hang`) REFERENCES `khach_hang` (`email`);
+
+--
+-- Các ràng buộc cho bảng `don_hang_san_pham`
+--
+ALTER TABLE `don_hang_san_pham`
+  ADD CONSTRAINT `fk_foreign_dh` FOREIGN KEY (`ma_dh`) REFERENCES `don_hang` (`ma_dh`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `gio_hang`
+--
+ALTER TABLE `gio_hang`
+  ADD CONSTRAINT `fk_foreign_kh_gh` FOREIGN KEY (`ma_khach_hang`) REFERENCES `khach_hang` (`email`),
+  ADD CONSTRAINT `fk_foreign_kh_sp` FOREIGN KEY (`ma_do_the_thao`) REFERENCES `do_the_thao` (`ma_sp`);
+
+--
+-- Các ràng buộc cho bảng `tai_khoan`
+--
+ALTER TABLE `tai_khoan`
+  ADD CONSTRAINT `fk_foreign_admin_tk` FOREIGN KEY (`email`) REFERENCES `nguoi_quan_tri` (`email`),
+  ADD CONSTRAINT `fk_foreign_kh_tk` FOREIGN KEY (`email`) REFERENCES `khach_hang` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
